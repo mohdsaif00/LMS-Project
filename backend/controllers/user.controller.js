@@ -80,12 +80,9 @@ export async function login(req, res) {
     });
   }
 
-const token = jwt.sign(
-  { email: user.email, _id: user._id },
-  process.env.JWT_SECRET,
-  { expiresIn: "24h" }
-);
-
+  const token = jwt.sign({ email: user.email, _id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: '24h',
+  });
 
   return res.status(200).json({
     message: 'Login successful',
