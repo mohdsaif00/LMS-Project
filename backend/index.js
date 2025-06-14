@@ -9,7 +9,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT;
 
-app.use("/api", userRouter);
+app.use('/api', userRouter);
 
 app.listen(PORT, async () => {
   await connectionToDB();
