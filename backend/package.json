@@ -24,10 +24,10 @@
     "morgan": "^1.10.0",
     "multer": "^2.0.1",
     "nodemailer": "^7.0.3",
-    "nodemon": "^3.1.10",
     "razorpay": "^2.9.6"
   },
   "devDependencies": {
+    "nodemon": "^3.1.10",
     "prettier": "^3.5.3"
   }
 }
