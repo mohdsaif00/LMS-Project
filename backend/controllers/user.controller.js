@@ -18,7 +18,9 @@ export async function register(req, res) {
 
   // Check if any required field is missing
   if (!email || !name || !password || !phone) {
-    return res.status(401).json({ message: 'Please provide the details', success: false, error: true });
+    return res
+      .status(401)
+      .json({ message: 'Please provide the details', success: false, error: true });
   }
 
   // Check if a user already exists with this email
@@ -26,7 +28,9 @@ export async function register(req, res) {
 
   // If the user already exists, send back an error
   if (checkUser) {
-    return res.status(402).json({ message: 'Already registered please login', success: false, error: true });
+    return res
+      .status(402)
+      .json({ message: 'Already registered please login', success: false, error: true });
   }
 
   // Hash the password with 10 rounds of salting
@@ -44,7 +48,9 @@ export async function register(req, res) {
   }
 
   // Otherwise, return a success message
-  return res.status(200).json({ message: 'User registered successfully', error: false, success: true });
+  return res
+    .status(200)
+    .json({ message: 'User registered successfully', error: false, success: true });
 }
 
 /**
@@ -58,7 +64,9 @@ export async function login(req, res) {
 
   // Check if both fields are provided
   if (!email || !password) {
-    return res.status(401).json({ message: 'Please provide the details', success: false, error: true });
+    return res
+      .status(401)
+      .json({ message: 'Please provide the details', success: false, error: true });
   }
 
   // Look for the User in the database by email
@@ -66,7 +74,9 @@ export async function login(req, res) {
 
   // If User is not found, send back an error
   if (!user) {
-    return res.status(403).json({ message: 'User not found. Please register.', success: false, error: true });
+    return res
+      .status(403)
+      .json({ message: 'User not found. Please register.', success: false, error: true });
   }
 
   // Compare password with hashed password in the database
@@ -74,14 +84,25 @@ export async function login(req, res) {
 
   // If password is incorrect, send back an error
   if (!isMatch) {
-    return res.status(400).json({ message: 'Invalid email or password', success: false, error: true });
+    return res
+      .status(400)
+      .json({ message: 'Invalid email or password', success: false, error: true });
   }
 
   // If password is correct, generate a JWT token with User's email and id
-  const token = jwt.sign({ email: user.email, _id: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
+  const token = jwt.sign({ email: user.email, _id: user._id }, process.env.JWT_SECRET, {
+    expiresIn: '24h',
+  });
 
   // Send back the User's details and the token
-  return res.status(200).json({ message: 'Login successful', success: true, error: false, user: { id: user._id, name: user.name, email: user.email, token } });
+  return res
+    .status(200)
+    .json({
+      message: 'Login successful',
+      success: true,
+      error: false,
+      user: { id: user._id, name: user.name, email: user.email, token },
+    });
 }
 
 /**
@@ -99,7 +120,12 @@ export async function logout(req, res) {
   }
 
   // Prepare cookie options to clear it
-  const cookieOption = { httpOnly: true, source: process.env.NODE_ENV, sameSite: 'strict', maxAge: 7 * 24 * 60 * 60 * 100 };  
+  const cookieOption = {
+    httpOnly: true,
+    source: process.env.NODE_ENV,
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 100,
+  };
 
   // Clear the 'accessToken' cookie
   res.clearCookie('accessToken', cookieOption);
@@ -131,9 +157,11 @@ export async function forgotPassword(req, res) {
   await user.save();
 
   // Send the OTP to the User's email
-  await transfer.sendMail({ to: user.email, 
+  await transfer.sendMail({
+    to: user.email,
     subject: 'Your Password Reset Code',
-     text: `Your Password Reset Code Is ${otp}` });
+    text: `Your Password Reset Code Is ${otp}`,
+  });
 
   // Send back a success message
   res.json({ message: 'OTP sent to your email' });
@@ -163,7 +191,7 @@ export async function resetPassword(req, res) {
 
   // If OTP has expired
   if (user.resetOtpExp < Date.now()) {
-    return res.status(400).json({ message:'OTP has expired' });
+    return res.status(400).json({ message: 'OTP has expired' });
   }
 
   // Update password and clear the reset fields
