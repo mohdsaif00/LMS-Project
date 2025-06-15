@@ -1,31 +1,21 @@
-import bcrypt from "bcryptjs"
-import UserModel from "../models/user.model.js"
+export async function logout(req, res) {
+  const userId = req.userId;
 
-export async function register(req, res){
-    const{ name, email, number, password} = req.body;
+  if (!userId) {
+    return res.json({
+      msg: 'please provide id',
+    });
+  }
 
-    if(!name || !email || !password || !number){
-        return res.status(400).json({
-            message: "please enter all details"
-        })
-    }/* else{res.send('thank you for signup')} */
+  const cookieOption = {
+    httpOnly: true,
+    source: process.env.NODE_ENV,
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 100,
+  };
+  res.clearCookie('accessToken', cookieOption);
 
-   /*  const checkuser = await UserModel.findone({number: number});
-
-    if(checkuser){
-        return res.status(404).json({
-            messsage: "Already Registered, You Need To Login"
-        })
-    } */
-
-    const hashpassword = await bcrypt.hash(password, 10)
-
-     const newUser = await UserModel.create({
-                  name,
-                  number,
-                  email,
-                  password:hashpassword
-            })
-
-            res.json(newUser)
+  return res.json({
+    message: 'Logged Out',
+  });
 }
