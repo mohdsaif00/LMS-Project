@@ -64,25 +64,25 @@ function Register() {
           </p>
           <div>
             <label className="block font-semibold " htmlFor="name">User Name</label>
-            <input id="name" type="text" name='name' placeholder="Enter your name" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.name} />
+            <input id="name" type="text" name='name' placeholder="Enter your name" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.name} required/>
           </div>
           <div>
             <label className="block font-semibold" htmlFor="email">Email</label>
-            <input id="email" type="email" name='email' placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.email} />
+            <input id="email" type="email" name='email' placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.email} required/>
           </div>
           <div>
             <label className="block font-semibold" htmlFor="password">Password</label>
-            <input id="password" type="password" name='password' placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.password} />
+            <input id="password" type="password" name='password' placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.password} required/>
           </div>
           <div>
             <label className="block font-semibold" htmlFor="phone">Phone</label>
-            <input id="phone" type="tel" name='phone' placeholder="Enter your phone number" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.phone} />
+            <input id="phone" type="tel" name='phone' placeholder="Enter your phone number" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.phone} required/>
           </div>
           <div className="flex items-center">
             <input type="checkbox" className="nr-2 accent-purple-600" />
             <p className="text-sm">  I agree to the {" "}<Link to="#" className="text-purple-600 hover:underline">Terms of Service</Link> and <Link to="#" className="text-purple-600 hover:underline">Privacy Policy </Link>.</p>
           </div>
-          <button className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition" type="submit" >Create Account</button>
+          <button className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 easy-in-out transition hover:scale-105" type="submit" >Create Account</button>
         </form>
 
         <div className="flex justify-center space-x-4 mt-6">

@@ -59,11 +59,11 @@ function Login() {
           <h2 className="text-3xl font-bold flex items-center justify-center">Sign In</h2>
           <div>
             <label className="block font-semibold" htmlFor="email">Email</label>
-            <input id="email" type="email" name='email' placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={loginData.email} />
+            <input id="email" type="email" name='email' placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={loginData.email} required/>
           </div>
           <div>
             <label className="block font-semibold" htmlFor="password">Password</label>
-            <input id="password" type="password" name='password' placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={loginData.password} />
+            <input id="password" type="password" name='password' placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={loginData.password} required/>
           </div>
           <button className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition" type="submit" >Login</button>
         </form>
