@@ -32,9 +32,16 @@ const userSchema = new mongoose.Schema({
   },
   resetOtp: {
     type: Number,
+    required: [true, 'Please provide a phone number'],
   },
   resetOtpExp: {
+    type: Number
+  },
+  resetOtp: {
     type: Number,
+  },
+  resetOtpExp: {
+    type: Date,
   },
 });
 
