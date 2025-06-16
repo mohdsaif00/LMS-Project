@@ -5,18 +5,30 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    trim: true
   },
   email: {
     type: String,
     required: true,
+    unique: true,
+    lowercase: true,
+    trim:true
   },
-  number: {
+  phone: {
     type: Number,
     required: true,
   },
+  role: {
+    type: String,
+    enum:['USER','ADMIN'],
+    default: 'USER'
+  },
   password: {
     type: String,
-    required: true,
+    required: [true, 'Please Provide a Password'],
+    trim:true,
+    minLength:[8, 'Provide atleast 8 digit password '],
+    select:false
   },
   resetOtp: {
     type: Number,
