@@ -1,25 +1,18 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-const userSchema = new mongoose.Schema({
+const userSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
     trim: true,
   },
-  email: {
+   email: {
     type: String,
     required: true,
-<<<<<<< HEAD
     unique: true,
     lowercase: true,
     trim: true,
-=======
->>>>>>> main
-  },
-  number: {
-    type: Number,
-    required: true,
   },
   password: {
     type: String,
@@ -28,13 +21,15 @@ const userSchema = new mongoose.Schema({
     minLength: [8, 'Provide atleast 8 digit password'],
     select: false,
   },
-  resetOtp: {
+  phone: {
     type: Number,
-<<<<<<< HEAD
-    required: [true, 'Please provide a phone number'],
-=======
->>>>>>> main
+    require: true,
   },
+   role: {
+    type: String,
+    enum: ['USER', 'ADMIN'],
+    default: 'USER',
+   },
   resetOtpExp: {
     type: Number,
   },
@@ -45,17 +40,6 @@ const userSchema = new mongoose.Schema({
     type: Date,
   },
 });
-
-userSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
-  next();
-});
-
-userSchema.methods.comparePass = async function (inputPass) {
-  return await bcrypt.compare(inputPass, this.password);
-};
 
 const UserModel = mongoose.model('User', userSchema);
 export default UserModel;
