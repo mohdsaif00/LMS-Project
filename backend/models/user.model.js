@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-   email: {
+  email: {
     type: String,
     required: true,
     unique: true,
@@ -25,13 +25,10 @@ const userSchema = mongoose.Schema({
     type: Number,
     require: true,
   },
-   role: {
+  role: {
     type: String,
     enum: ['USER', 'ADMIN'],
     default: 'USER',
-   },
-  resetOtpExp: {
-    type: Number,
   },
   resetOtp: {
     type: Number,

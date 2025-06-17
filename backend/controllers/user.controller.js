@@ -175,8 +175,8 @@ export async function verifyOtp(req, res) {
     });
   }
 
-  user.resetOtp = null;
-  user.resetOtpExp = null;
+  // user.resetOtp = null;
+  // user.resetOtpExp = null;
   await user.save();
 
   res.status(200).json({
@@ -220,8 +220,8 @@ export async function resetPassword(req, res) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   user.password = hashedPassword;
-  user.resetOtp = undefined;
-  user.resetOtpExp = undefined;
+  // user.resetOtp = undefined;
+  // user.resetOtpExp = undefined;
 
   await user.save();
 
