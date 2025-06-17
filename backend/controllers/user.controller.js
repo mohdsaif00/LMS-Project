@@ -86,7 +86,9 @@ export async function login(req, res) {
     });
   }
 
-  const token = jwt.sign({ email: user.email, _id: user._id }, process.env.JWT_SECRET, {
+  const token = jwt.sign(
+    { email: user.email, _id: user._id }, 
+    process.env.JWT_SECRET, {
     expiresIn: '24h',
   });
 
@@ -100,6 +102,28 @@ export async function login(req, res) {
       email: user.email,
       token: token,
     },
+  });
+}
+
+//Logout
+export async function logout(req, res) {
+  const userId = req.userId;
+
+  if (!userId) {
+    return res.status(400).json({ message: 'Please provide user ID' });
+  }
+
+  const cookieOption = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+  };
+
+  res.clearCookie('accessToken', cookieOption);
+
+  return res.status(200).json({
+    message: 'Logout successful',
+    success: true,
   });
 }
 
@@ -137,6 +161,7 @@ export async function forgotPassword(req, res) {
   });
 }
 
+//Verify OTP
 export async function verifyOtp(req, res) {
   const { email, otp } = req.body;
 
@@ -175,8 +200,8 @@ export async function verifyOtp(req, res) {
     });
   }
 
-  // user.resetOtp = null;
-  // user.resetOtpExp = null;
+  user.resetOtp = null;
+  user.resetOtpExp = null;
   await user.save();
 
   res.status(200).json({
@@ -220,8 +245,8 @@ export async function resetPassword(req, res) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   user.password = hashedPassword;
-  // user.resetOtp = undefined;
-  // user.resetOtpExp = undefined;
+  user.resetOtp = undefined;
+  user.resetOtpExp = undefined;
 
   await user.save();
 

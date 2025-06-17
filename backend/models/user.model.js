@@ -1,34 +1,33 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true,
+    trim: true
   },
   email: {
     type: String,
     required: true,
     unique: true,
     lowercase: true,
-    trim: true,
+    trim:true
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
-    trim: true,
-    minLength: [8, 'Provide atleast 8 digit password'],
-    select: false,
+    required: [true, 'Please Provide a Password'],
+    trim:true,
+    minLength:[8, 'Provide atleast 8 digit password '],
+    select:false
   },
   phone: {
     type: Number,
-    require: true,
+    required: true,
   },
   role: {
     type: String,
-    enum: ['USER', 'ADMIN'],
-    default: 'USER',
+    enum:['USER','ADMIN'],
+    default: 'USER'
   },
   resetOtp: {
     type: Number,
