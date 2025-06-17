@@ -34,13 +34,13 @@ const Home = () => {
 
   return (
     <>
-    {/* SAIF */}
+      {/* SAIF */}
       {/* Main Container */}
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        
+
         {/* Hero Section with Text and Image */}
         <div className="flex flex-col lg:flex-row justify-between items-center  max-w-8xl ml-16">
-          
+
           {/* Left Side - Text Content */}
           <div className="flex-1 max-w-4xl mt-12 lg:mt-24">
             {/* Main Heading */}
@@ -48,9 +48,8 @@ const Home = () => {
               <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 flex items-baseline flex-wrap">
                 <span>Advance Your Career with</span>
                 <span
-                  className={`text-3xl md:text-3xl ml-3 font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent transition-all duration-300 ${
-                    isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-                  }`}
+                  className={`text-3xl md:text-3xl ml-3 font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent transition-all duration-300 ${isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
+                    }`}
                 >
                   {texts[currentText]}
                 </span>
@@ -92,10 +91,10 @@ const Home = () => {
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 mb-12 text-center">
               Our Journey in Numbers
             </h2>
-            
+
             {/* Stats Component will render here */}
             {/* <Stats /> */}
-            
+
             {/* Temporary placeholder - remove when Stats component works */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="text-center p-6 bg-gray-50 rounded-lg">
@@ -117,11 +116,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="py-16 bg-gray-50">
-            <div className="max-w-7xl mx-auto px-6">
-              <CourseCategorie/>
-            </div>
+          <div className="max-w-7xl mx-auto px-6">
+            <CourseCategorie />
+          </div>
         </div>
       </div>
 
