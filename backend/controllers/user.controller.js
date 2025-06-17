@@ -5,7 +5,11 @@ import { mailer } from '../utils/nodemailer.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-//Register
+/**
+ * REGISTER
+ * ------------------------------------------------------------------------------
+ * Allows a new user to register.
+ */
 export async function register(req, res) {
   const { name, email, password, phone } = req.body;
 
@@ -54,7 +58,11 @@ export async function register(req, res) {
   });
 }
 
-//Login
+/**
+ * LOGIN
+ * ------------------------------------------------------------------------------
+ * Allows a registered user to login.
+ */
 export async function login(req, res) {
   const { email, password } = req.body;
 
@@ -66,6 +74,7 @@ export async function login(req, res) {
     });
   }
 
+// Look for the User in the database by email
   const user = await UserModel.findOne({ email: email }).select('+password');
 
   if (!user) {
@@ -101,6 +110,28 @@ export async function login(req, res) {
       token: token,
     },
   });
+}
+
+//LogOut
+export async function logout(req, res) {
+  // UserId should be present in the request (after authentication)
+  const userId = req.userId;
+
+  // If UserId is not present, send back a message
+  if (!userId) {
+    return res.json({ msg: 'please provide id' });
+  }
+
+  // Prepare cookie options to clear it
+  const cookieOption = {
+    httpOnly: true,
+    source: process.env.NODE_ENV,
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 100,
+  };
+
+  // Clear the 'accessToken' cookie
+  res.clearCookie('accessToken', cookieOption);
 }
 
 // Forgot Password
