@@ -105,6 +105,7 @@ export async function login(req, res) {
   });
 }
 
+
 //Logout
 export async function logout(req, res) {
   const userId = req.userId;
@@ -126,6 +127,8 @@ export async function logout(req, res) {
     success: true,
   });
 }
+
+
 
 // Forgot Password
 export async function forgotPassword(req, res) {
