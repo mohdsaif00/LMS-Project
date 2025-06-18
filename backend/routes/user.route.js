@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import { 
-  register, 
-  login, 
-  logout, 
-  forgotPassword, 
-  verifyOtp, 
-  resetPassword 
+import {
+  register,
+  login,
+  logout,
+  forgotPassword,
+  verifyOtp,
+  resetPassword,
 } from '../controllers/user.controller.js';
 
 const userRouter = Router();
