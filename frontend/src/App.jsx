@@ -8,11 +8,7 @@ function App() {
 
   return (
     <BrowserRouter>
-<<<<<<< HEAD
     <Routes>
-=======
-    <Routes> 
->>>>>>> c3b9abe41dd0c163d797a4989df22b3d3d9a5ffd
       <Route path="/" element={<Home />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
