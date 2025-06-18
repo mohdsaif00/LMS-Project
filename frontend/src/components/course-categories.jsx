@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import React from 'react';
+>>>>>>> c3b9abe41dd0c163d797a4989df22b3d3d9a5ffd
 import { Brain, Code, Monitor, Cpu, Palette, Cloud, Target, Shield } from 'lucide-react';
 
 const CourseCategoriesSection = () => {
@@ -61,7 +65,11 @@ const CourseCategoriesSection = () => {
   ];
 
   return (
+<<<<<<< HEAD
     <div className="min-h-xl bg-gray-50 py-16 px-4">
+=======
+    <div className="min-h-screen bg-gray-50 py-16 px-4">
+>>>>>>> c3b9abe41dd0c163d797a4989df22b3d3d9a5ffd
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
