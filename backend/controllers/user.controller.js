@@ -105,10 +105,6 @@ export async function login(req, res) {
   });
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 424e8922a63aca601bde57a113f26f52f37c5330
 //Logout
 export async function logout(req, res) {
   const userId = req.userId;
@@ -130,11 +126,6 @@ export async function logout(req, res) {
     success: true,
   });
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 424e8922a63aca601bde57a113f26f52f37c5330
 
 // Forgot Password
 export async function forgotPassword(req, res) {
