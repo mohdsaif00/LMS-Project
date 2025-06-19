@@ -38,7 +38,7 @@ export default function ResetPassword() {
             if (success) {
                 handleSuccess(message);
                 setTimeout(() => {
-                    navigate("/");
+                    navigate("/login");
                 }, 300);
             } else {
                 handleError(message);

@@ -3,7 +3,8 @@ import Home from './pages/Home'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import ForgotPassword from './components/Forgotpass'
-import ResetPassword from './components/ResetPass'
+import ResetPassword from './components/resetpass'
+
 function App() {
 
   return (
