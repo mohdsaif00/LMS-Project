@@ -14,49 +14,58 @@ function Register() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
-    const copysignUpData = { ...signUpData};
+    const copysignUpData = { ...signUpData };
     copysignUpData[name] = value;
     setSignUpData(copysignUpData);
   }
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  const { name, email, password, phone } = signUpData;
+    e.preventDefault();
+    const { name, email, password, phone } = signUpData;
 
-  if (!name || !email || !password || !phone) {
-    return handleError("All fields are required");
-  }
-
-  try {
-    const response = await fetch("http://localhost:5000/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(signUpData)
-    });
-
-    const data = await response.json();
-    const { success, message } = data;
-
-    if (success) {
-      handleSuccess(message);
-      setTimeout(() => {
-        navigate("/login");
-      }, 1000);
-    } else {
-      handleError(message);
+    if (!name || !email || !password || !phone) {
+      return handleError("All fields are required");
     }
-  } catch (error) {
-    handleError(error.message || "Something went wrong");
-  }
-};
+
+    try {
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(signUpData)
+      });
+
+      const data = await response.json();
+      const { success, message } = data;
+
+      if (success) {
+        handleSuccess(message);
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      } else {
+        handleError(message);
+      }
+    } catch (error) {
+      handleError(error.message || "Something went wrong");
+    }
+  };
 
 
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-1">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md ">
+        <div className='flex justify-end '>
+            <img
+              src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
+              alt="Cut"
+              className='w-[14px] cursor-pointer'
+              onClick={() => navigate(-1)}
+            />
+        </div>
+
         <form className="space-y-4" onSubmit={handleSubmit}>
           <h2 className="text-3xl font-bold flex items-center justify-center">Sign up</h2>
           <p className="text-sm mb-4 flex items-center justify-center">Already have an account?{" "}
@@ -64,25 +73,25 @@ function Register() {
           </p>
           <div>
             <label className="block font-semibold " htmlFor="name">User Name</label>
-            <input id="name" type="text" name='name' placeholder="Enter your name" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.name} />
+            <input id="name" type="text" name='name' placeholder="Enter your name" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.name} required />
           </div>
           <div>
             <label className="block font-semibold" htmlFor="email">Email</label>
-            <input id="email" type="email" name='email' placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.email} />
+            <input id="email" type="email" name='email' placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.email} required />
           </div>
           <div>
             <label className="block font-semibold" htmlFor="password">Password</label>
-            <input id="password" type="password" name='password' placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.password} />
+            <input id="password" type="password" name='password' minLength="6" maxLength="15" placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.password} required />
           </div>
           <div>
             <label className="block font-semibold" htmlFor="phone">Phone</label>
-            <input id="phone" type="tel" name='phone' placeholder="Enter your phone number" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.phone} />
+            <input id="phone" type="tel" name='phone' maxLength="10" pattern="[0-9]{10}" inputMode="numeric" placeholder="Enter your phone number" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.phone} required />
           </div>
           <div className="flex items-center">
             <input type="checkbox" className="nr-2 accent-purple-600" />
             <p className="text-sm">  I agree to the {" "}<Link to="#" className="text-purple-600 hover:underline">Terms of Service</Link> and <Link to="#" className="text-purple-600 hover:underline">Privacy Policy </Link>.</p>
           </div>
-          <button className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition" type="submit" >Create Account</button>
+          <button className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 easy-in-out transition hover:scale-105" type="submit" >Create Account</button>
         </form>
 
         <div className="flex justify-center space-x-4 mt-6">

@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import {
-  forgotPassword,
+  register,
   login,
   logout,
-  register,
+  forgotPassword,
+  verifyOtp,
   resetPassword,
 } from '../controllers/user.controller.js';
 
@@ -13,6 +14,7 @@ userRouter.post('/register', register);
 userRouter.post('/login', login);
 userRouter.post('/logout', logout);
 userRouter.post('/forgot-password', forgotPassword);
+userRouter.post('/verify-otp', verifyOtp);
 userRouter.post('/reset-password', resetPassword);
 
 export default userRouter;
