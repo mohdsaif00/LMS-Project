@@ -118,7 +118,7 @@ export default function Courses() {
 
 
   const renderCard = (course) => (
-    <div key={course.id} className="bg-white rounded-xl shadow border overflow-hidden">
+    <div key={course.id} className="bg-white rounded-xl shadow border overflow-hidden easy-in-out transition hover:scale-105 cursor-pointer">
       <div className={`${bgColors[course.name] || 'bg-gray-300'} p-8`}>
         <div className='flex justify-center items-center '>
           <img src={course.image} alt="JavaScript" className="h-10 w-10" />

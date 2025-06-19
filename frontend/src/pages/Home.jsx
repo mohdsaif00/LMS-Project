@@ -68,10 +68,10 @@ function Home() {
 
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <button className="px-8 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:border-gray-400 transition-colors duration-200 min-w-40">
+                <button className="px-8 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:border-gray-400 transition-colors duration-200 min-w-40 easy-in-out transition hover:scale-105">
                   Start for Free
                 </button>
-                <button className="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 min-w-40">
+                <button className="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 min-w-40 easy-in-out transition hover:scale-105">
                   Explore Plus
                 </button>
               </div>
@@ -124,7 +124,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="min-h-xl flex justify-center font-arial py-4">
+      <section id="course"className="min-h-xl flex justify-center font-arial py-4">
         <div className="max-w-6xl p-4 pt-10 pb-20">
           <div>
             <h1 className='text-4xl text-center font-bold pt-1 '>Most Popular Courses</h1>
@@ -142,12 +142,12 @@ function Home() {
               {"  "}
               <strong className="text-yellow-400">★★★★★</strong> (Based on 3265 ratings)
             </p>
-            
+
             <div className="flex justify-between">
               <h2 className="text-4xl font-bold text-gray-900 mt-4">
                 What our customers say
               </h2>
-              <button className="mt-6 bg-purple-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+              <button className="mt-6 bg-purple-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-purple-700 easy-in-out transition hover:scale-105">
                 View reviews
               </button>
             </div>
@@ -162,7 +162,7 @@ function Home() {
           </div>
 
           <div className="mt-16 flex justify-center flex-wrap gap-5">
-            <div className="bg-white p-6 rounded-xl w-[250px] shadow-md text-center">
+            <div className="bg-white p-6 rounded-xl w-[250px] shadow-md text-center easy-in-out transition hover:scale-105">
               <img
                 src="https://jobs.kreativa.me/wp-content/uploads/2021/01/french-dp.jpg"
                 alt="customer"
@@ -177,7 +177,7 @@ function Home() {
               <p className="font-bold text-gray-900 mt-2">Gladys Colbert</p>
               <p className="text-sm text-gray-600">Software Engineer at Palantir</p>
             </div>
-            <div className="bg-white p-6 rounded-xl w-[250px] shadow-md text-center">
+            <div className="bg-white p-6 rounded-xl w-[250px] shadow-md text-center easy-in-out transition hover:scale-105">
               <img src="https://uploads.onecompiler.io/42zhuec4k/43n5nmwv6/avatar-3.d3ce7f20113e7d124501.jpg" className="w-16 h-16 rounded-full mx-auto mb-4" />
               <p className="text-gray-700 mb-5 "> "Vestibulum ante ipsum primis in fucibus orci luctus et ultrices posure cubillia curae; poin nec justo risus, quisque ornaew nisli eu mi fermentum</p>
               <p className=" text-yellow-500">★ 5.0 </p>
@@ -185,7 +185,7 @@ function Home() {
               <p className="text-sm text-gray-600">Web Develoer at Codescandy</p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl  w-[250px] shadow-md text-center">
+            <div className="bg-white p-6 rounded-xl  w-[250px] shadow-md text-center easy-in-out transition hover:scale-105">
               <img src="https://uploads.onecompiler.io/42zhuec4k/43n5nmwv6/avatar-5.991ead30c8a647a4c57f.jpg" className="w-16 h-16 rounded-full mx-auto mb-4" />
               <p className="text-gray-700 mb-10">"Present augue ligula imperdiet. Donec elemntum leo porta vulputate neque sed.</p>
               <p className="text-yellow-500 text-1g">★ 3.5</p>
@@ -193,7 +193,7 @@ function Home() {
               <p className="text-sm text-gray-600">Marketing Manager at EaseTemplate</p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl  w-[250px] shadow-md text-center">
+            <div className="bg-white p-6 rounded-xl  w-[250px] shadow-md text-center easy-in-out transition hover:scale-105">
               <img src="https://uploads.onecompiler.io/42zhuec4k/43n5nmwv6/avatar-3.d3ce7f20113e7d124501.jpg" className="w-16 h-16 rounded-full mx-auto mb-4" />
               <p className="text-gray-700 mb-10">"Present augue ligula imperdiet. Donec elemntum leo porta vulputate neque sed.</p>
               <p className="text-yellow-500 text-1g">★ 3.5</p>

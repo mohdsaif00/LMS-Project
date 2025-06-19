@@ -1,3 +1,4 @@
+import {Link}  from "react-router-dom";
 function Header() {
     return (
         <nav className="min-h-xl flex items-center justify-around bg-white shadow-md py-2  ">
@@ -8,17 +9,17 @@ function Header() {
                     </a>
                 </div>
                 <div className="flex items-center justify-center space-x-20">
-                    <a href="#" className="font-medium hover:text-purple-600">Home </a>
-                    <a href="#" className="font-medium hover:text-purple-600"> Courses </a>
-                    <a href="#" className="font-medium hover:text-purple-600"> Contact</a>
+                    <Link to="#" className="font-medium hover:text-purple-600">Home </Link>
+                    <Link to="#" className="font-medium hover:text-purple-600"> Courses </Link>
+                    <Link to="#" className="font-medium hover:text-purple-600"> Contact</Link>
                 </div>
                 <div className="flex items-center justify-center space-x-6">
-                    <button className="border border-purple-600 text-purple-600 px-4 py-2 rounded hover:bg-purple-500 hover:text-white">
+                    <Link to="/login" className="border border-purple-600 text-purple-600 px-4 py-2 rounded hover:bg-purple-500 hover:text-white">
                         Sign In
-                    </button>
-                    <button className="border border-purple-600 text-white px-4 py-2 rounded bg-purple-600 hover:bg-purple-700">
+                    </Link>
+                    <Link to="/register" className="border border-purple-600 text-white px-4 py-2 rounded bg-purple-600 hover:bg-purple-700">
                         Sign up
-                    </button>
+                    </Link>
                 </div>
             </div>
         </nav>
