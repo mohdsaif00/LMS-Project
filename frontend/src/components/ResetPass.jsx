@@ -53,10 +53,14 @@ export default function ResetPassword() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
             <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md ">
-                <div className='flex justify-between '>
-                    <Link to="/"><img src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/left-arrow.png" alt="" className='w-[16px]' /></Link>
-                    <Link to="/"><img src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png" alt="" className='w-[14px]' /></Link>
-                </div>
+        <div className='flex justify-end '>
+            <img
+              src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
+              alt="Cut"
+              className='w-[14px] cursor-pointer'
+              onClick={() => navigate(-1)}
+            />
+        </div>
                 <form className="space-y-4 p-4" onSubmit={handleSubmit}>
                     <h2 className="text-2xl font-bold flex items-center justify-center">Reset Password</h2>
                     <div>
@@ -65,11 +69,11 @@ export default function ResetPassword() {
                     </div>
                     <div>
                         <label className="block font-semibold" htmlFor="password">New Password</label>
-                        <input id="password" type="text" name='password' placeholder="Enter your password" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={resetPassData.password} required />
+                        <input id="password" type="text" name='password' minLength="6" maxLength="15" placeholder="Enter your password" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={resetPassData.password} required />
                     </div>
                     <div>
                         <label className="block font-semibold" htmlFor="confirmPassword">Confirm Password</label>
-                        <input id="confirmPassword" type="text" name='confirmPass' placeholder="Enter confirm password" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={resetPassData.confirmPass} required />
+                        <input id="confirmPassword" type="text" name='confirmPass' minLength="6" maxLength="15" placeholder="Enter confirm password" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={resetPassData.confirmPass} required />
                     </div>
 
                     <button className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition hover:scale-105" type="submit" >Reset</button>

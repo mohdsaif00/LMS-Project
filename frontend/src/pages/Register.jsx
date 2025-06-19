@@ -57,9 +57,13 @@ function Register() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-1">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md ">
-        <div className='flex justify-between '>
-          <Link to="/"><img src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/left-arrow.png" alt="" className='w-[16px]' /></Link>
-          <Link to="/"><img src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png" alt="" className='w-[14px]' /></Link>
+        <div className='flex justify-end '>
+            <img
+              src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
+              alt="Cut"
+              className='w-[14px] cursor-pointer'
+              onClick={() => navigate(-1)}
+            />
         </div>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
@@ -77,11 +81,11 @@ function Register() {
           </div>
           <div>
             <label className="block font-semibold" htmlFor="password">Password</label>
-            <input id="password" type="password" name='password' placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.password} required />
+            <input id="password" type="password" name='password' minLength="6" maxLength="15" placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.password} required />
           </div>
           <div>
             <label className="block font-semibold" htmlFor="phone">Phone</label>
-            <input id="phone" type="tel" name='phone' placeholder="Enter your phone number" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.phone} required />
+            <input id="phone" type="tel" name='phone' maxLength="10" pattern="[0-9]{10}" inputMode="numeric" placeholder="Enter your phone number" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.phone} required />
           </div>
           <div className="flex items-center">
             <input type="checkbox" className="nr-2 accent-purple-600" />

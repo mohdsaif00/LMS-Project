@@ -127,7 +127,7 @@ export default function Courses() {
         <p className="font-semibold mt-2 text-white text-center text-xl">{course.name}</p>
       </div>
       <div className="p-4">
-        <span className="text-xs text-cyan-600 font-semibold bg-cyan-100 px-2 py-1 rounded">{course.level}</span>
+        <span className="text-xs text-cyan-600 font-semibold bg-cyan-100 px-2 py-1 rounded-2xl">{course.level}</span>
         <h3 className="font-bold text-lg mt-4">{course.title}</h3>
         <p className="text-sm text-gray-500 mt-1">By: {course.author}</p>
         <div className="flex items-center mt-4 text-l text-yellow-500">

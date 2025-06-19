@@ -7,14 +7,14 @@ function Footer() {
                     <h1 className="text-xl font-bold text-purple-700">UpSkills</h1>
                     <p className="mt-4 text-gray-600">Geek is feature-rich components and beautifully Bootstrap UIKit for developers, built with bootstrap responsive framework.</p>
                     <div className="flex pt-10 gap-4">
-                        <a href="">
+                        <a href="https://www.facebook.com" target="_blank">
                             <img src="https://img.icons8.com/?size=100&id=118467&format=png&color=7950F2" alt="facebook-logo" className="w-[25px]" />
                         </a>
-                        <a href="">
+                        <a href="https://www.twitter.com" target="_blank">
                             <img src="https://img.icons8.com/?size=100&id=8824&format=png&color=7950F2" alt="twitter-logo" className="w-[25px]" />
                         </a>
-                        <a href="">
-                            <img src="https://img.icons8.com/?size=100&id=3tC9EQumUAuq&format=png&color=7950F2" alt="twitter-logo" className="w-[25px]" />
+                        <a href="https://www.github.com" target="_blank">
+                            <img src="https://img.icons8.com/?size=100&id=3tC9EQumUAuq&format=png&color=7950F2" alt="github-logo" className="w-[25px]" />
                         </a>
                     </div>
                 </div>
