@@ -2,7 +2,7 @@ import Courses from '../components/courses';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import { useEffect, useState } from 'react';
-import image1 from '../assets/image.png';
+/* import image1 from '../assets/image.png'; */
 import CourseCategoriesSection from '../components/course-categories';
 
 function Home() {
@@ -68,10 +68,10 @@ function Home() {
 
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <button className="px-8 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:border-gray-400 transition-colors duration-200 min-w-40 easy-in-out transition hover:scale-105">
+                <button className="px-8 py-3 border-2 border-gray-300 rounded-lg text-gray-700 hover:border-gray-400 transition-colors- duration-200 min-w-40 easy-in-out transition hover:scale-105">
                   Start for Free
                 </button>
-                <button className="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 min-w-40 easy-in-out transition hover:scale-105">
+                <button className="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transiticolorson- duration-200 min-w-40 easy-in-out transition hover:scale-105">
                   Explore Plus
                 </button>
               </div>
