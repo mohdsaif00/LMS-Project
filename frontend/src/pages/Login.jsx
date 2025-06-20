@@ -56,12 +56,12 @@ function Login() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md ">
         <div className='flex justify-end '>
-            <img
-              src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
-              alt="Cut"
-              className='w-[14px] cursor-pointer'
-              onClick={() => navigate(-1)}
-            />
+          <img
+            src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
+            alt="Cut"
+            className='w-[14px] cursor-pointer'
+            onClick={() => navigate(-1)}
+          />
         </div>
         <form className="space-y-4 p-4" onSubmit={handleSubmit}>
           <h2 className="text-3xl font-bold flex items-center justify-center">Sign In</h2>
@@ -75,13 +75,16 @@ function Login() {
           </div>
           <div className="flex justify-between">
             <div className='flex '><input type="checkbox" className="nr-2 accent-purple-600" />
-            <p className="text-l">Remember me</p></div>
-            
-          <Link to="/forgotpassword" className="text-purple-600 hover:underline ml-1">Forgot Password?</Link>
+              <p className="text-l">Remember me</p></div>
+
+            <Link to="/forgotpassword" className="text-purple-600 hover:underline ml-1">Forgot Password?</Link>
           </div>
           <button className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition hover:scale-105" type="submit" >Login</button>
+          <p className="text-sm mb-4 flex items-center justify-center">Don't have an account?{" "}
+            <Link to="/register" className="text-purple-600 hover:underline ml-1">SignUp</Link>
+          </p>
         </form>
-        
+
 
         <div className="flex justify-center space-x-4 mt-4">
 
