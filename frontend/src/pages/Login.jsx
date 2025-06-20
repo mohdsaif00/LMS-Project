@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { handleError, handleSuccess } from '../utils/handleMessage';
+import { useAuth } from '../context/AuthContext';
+
 
 function Login() {
-
+  const { login } = useAuth();
   const navigate = useNavigate()
   const [loginData, setLoginData] = useState({
     email: "",
@@ -35,9 +37,10 @@ function Login() {
       });
 
       const data = await response.json();
-      const { success, message } = data;
+      const { success, message, user } = data;
 
       if (success) {
+        login(user);
         handleSuccess(message);
         setTimeout(() => {
           navigate("/");
@@ -71,7 +74,7 @@ function Login() {
           </div>
           <div>
             <label className="block font-semibold" htmlFor="password">Password</label>
-            <input id="password" type="password" name='password' placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={loginData.password} required />
+            <input id="password" type="password" name='password' minLength="6" maxLength="15" placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={loginData.password} required />
           </div>
           <div className="flex justify-between">
             <div className='flex '><input type="checkbox" className="nr-2 accent-purple-600" />
@@ -85,14 +88,12 @@ function Login() {
           </p>
         </form>
 
-
         <div className="flex justify-center space-x-4 mt-4">
 
           <Link to="https://www.facebook.com/"><img src="https://assets.onecompiler.app/42zhuec4k/43mnndgxm/youtube-social-media-facebook-logo-computer-icons-irina-shayk-Picsart-BackgroundRemover.jpg" alt="logo" className="w-[40px] p-1 border-2 border-gray-500 rounded-md  " /></Link>
           <Link to="https://www.twitter.com/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEIS-7gWOC28DCrh5twLruzE_DgQFB40lvRA&s" className="w-[40px] p-2 border-2 border-gray-500 rounded-md" /></Link>
           <Link to="https://www.linkedin.com/"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKKZ-0lj_QLCsIhAcwUiIoctJmUS3pn5F-vQ&s" className="w-[40px] p-2 border-2 border-gray-500 rounded-md" /></Link>
           <Link to="https://www.github.com/"><img src="https://www.shareicon.net/data/2015/09/15/101512_logo_512x512.png" className="w-[40px] p-2 border-2 border-gray-500 rounded-md" /></Link>
-
         </div>
       </div>
     </div>

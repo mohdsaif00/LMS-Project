@@ -29,7 +29,7 @@ export default function ResetPassword() {
             const response = await fetch("http://localhost:5000/api/reset-password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify( resetPassData ),
+                body: JSON.stringify(resetPassData),
             });
 
             const data = await response.json();
@@ -53,14 +53,14 @@ export default function ResetPassword() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
             <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md ">
-        <div className='flex justify-end '>
-            <img
-              src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
-              alt="Cut"
-              className='w-[14px] cursor-pointer'
-              onClick={() => navigate(-1)}
-            />
-        </div>
+                <div className='flex justify-end '>
+                    <img
+                        src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
+                        alt="Cut"
+                        className='w-[14px] cursor-pointer'
+                        onClick={() => navigate(-1)}
+                    />
+                </div>
                 <form className="space-y-4 p-4" onSubmit={handleSubmit}>
                     <h2 className="text-2xl font-bold flex items-center justify-center">Reset Password</h2>
                     <div>

@@ -58,12 +58,12 @@ function Register() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-1">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md ">
         <div className='flex justify-end '>
-            <img
-              src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
-              alt="Cut"
-              className='w-[14px] cursor-pointer'
-              onClick={() => navigate(-1)}
-            />
+          <img
+            src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
+            alt="Cut"
+            className='w-[14px] cursor-pointer'
+            onClick={() => navigate(-1)}
+          />
         </div>
 
         <form className="space-y-4" onSubmit={handleSubmit}>
@@ -80,13 +80,14 @@ function Register() {
             <input id="email" type="email" name='email' placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.email} required />
           </div>
           <div>
-            <label className="block font-semibold" htmlFor="password">Password</label>
-            <input id="password" type="password" name='password' minLength="6" maxLength="15" placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.password} required />
-          </div>
-          <div>
             <label className="block font-semibold" htmlFor="phone">Phone</label>
             <input id="phone" type="tel" name='phone' maxLength="10" pattern="[0-9]{10}" inputMode="numeric" placeholder="Enter your phone number" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.phone} required />
           </div>
+          <div>
+            <label className="block font-semibold" htmlFor="password">Password</label>
+            <input id="password" type="password" name='password' minLength="6" maxLength="15" placeholder="********" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={signUpData.password} required />
+          </div>
+
           <div className="flex items-center">
             <input type="checkbox" className="nr-2 accent-purple-600" />
             <p className="text-sm">  I agree to the {" "}<Link to="#" className="text-purple-600 hover:underline">Terms of Service</Link> and <Link to="#" className="text-purple-600 hover:underline">Privacy Policy </Link>.</p>

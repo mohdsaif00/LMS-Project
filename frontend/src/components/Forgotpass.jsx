@@ -72,14 +72,14 @@ export default function ForgotPassword() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-        <div className='flex justify-end '>
-            <img
-              src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
-              alt="Cut"
-              className='w-[14px] cursor-pointer'
-              onClick={() => navigate(-1)}
-            />
-        </div>
+                <div className='flex justify-end '>
+                    <img
+                        src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
+                        alt="Cut"
+                        className='w-[14px] cursor-pointer'
+                        onClick={() => navigate(-1)}
+                    />
+                </div>
                 <form className="space-y-4 p-4" onSubmit={handleSubmit}>
                     <h2 className="text-2xl font-bold flex items-center justify-center">
                         {showOtpField ? "Verify OTP" : "Forgot Password"}
