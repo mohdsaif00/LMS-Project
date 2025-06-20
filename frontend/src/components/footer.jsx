@@ -1,4 +1,4 @@
-export default function Footer() {
+function Footer() {
     return (
         <footer className=" bg-gray-100 px-20 py-10 items-center">
             <div className="flex justify-center min-h-xl">
@@ -68,3 +68,5 @@ export default function Footer() {
         </footer>
     );
 }
+
+export default Footer;

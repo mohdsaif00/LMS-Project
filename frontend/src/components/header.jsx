@@ -4,9 +4,9 @@ function Header() {
         <nav className="min-h-xl flex items-center justify-around bg-white shadow-md py-2  ">
             <div className="flex justify-around gap-60">
                 <div className="flex gap-20">
-                    <Link href="#">
+                    <a href="#">
                         <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/c4e056b6-23b3-41d0-8200-93f445bac86c.png" alt="logo" className="w-40" />
-                    </Link>
+                    </a>
                 </div>
                 <div className="flex items-center justify-center space-x-20">
                     <Link to="#" className="font-medium hover:text-purple-600">Home </Link>
