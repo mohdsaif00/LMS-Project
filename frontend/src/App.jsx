@@ -4,6 +4,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import ForgotPassword from './components/Forgotpass'
 import ResetPassword from './components/resetpass'
+import AdminDashboard from './pages/AdminDashboard'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/resetpassword" element={<ResetPassword />} />
+      <Route path="/admindashboard" element={<AdminDashboard />} />
     </Routes> 
     </BrowserRouter>
   )
