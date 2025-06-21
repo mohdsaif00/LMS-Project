@@ -4,6 +4,7 @@ config();
 import connectionToDB from './config/dbConnection.js';
 import userRouter from './routes/user.route.js';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 app.use(express.json());
@@ -13,7 +14,7 @@ app.use(
     origin: process.env.FRONTEND_URL,
   })
 );
-
+app.use(cookieParser());
 const PORT = process.env.PORT;
 
 app.get('/', (req, res) => {

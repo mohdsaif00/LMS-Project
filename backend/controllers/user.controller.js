@@ -1,27 +1,31 @@
 import UserModel from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { mailer } from '../utils/nodemailer.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
-//Register
+const cookieOption = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'strict',
+};
+
+// Register
 export async function register(req, res) {
-  const { name, email, password, phone } = req.body;
+  const { name, email, password, phone, role } = req.body;
 
   if (!email || !name || !password || !phone) {
-    return res.status(401).json({
-      message: 'Please provide the details',
+    return res.status(400).json({
+      message: 'Please provide all required details.',
       success: false,
       error: true,
     });
   }
 
-  const checkUser = await UserModel.findOne({ email: email });
-
-  if (checkUser) {
-    return res.status(402).json({
-      message: 'Already registered please login',
+  const existingUser = await UserModel.findOne({ email });
+  if (existingUser) {
+    return res.status(401).json({
+      message: 'User already registered. Please login.',
       success: false,
       error: true,
     });
@@ -29,47 +33,57 @@ export async function register(req, res) {
 
   const hashpassword = await bcrypt.hash(password, 10);
 
-  const newUser = await new UserModel({
-    name: name,
-    email: email,
-    phone: phone,
+  const newUser = new UserModel({
+    name,
+    email,
+    phone,
     password: hashpassword,
+    role,
   });
 
-  await newUser.save();
-
-  // If the User wasn't successfully saved, return an error
-  if (!newUser) {
-    return res.status(400).json({
-      message: 'User not registered',
+  const token = newUser.generateJwtToken();
+  if (!token) {
+    return res.status(402).json({
+      message: 'Token not generated',
       success: false,
       error: true,
     });
   }
 
+  res.cookie('accessToken', token, cookieOption);
+
+  await newUser.save();
+
+
+
   return res.status(200).json({
     message: 'User registered successfully',
-    error: false,
     success: true,
+    error: false,
+    user: {
+      id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+    },
   });
 }
 
-//Login
+// Login
 export async function login(req, res) {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(401).json({
-      message: 'Please provide the details',
+    return res.status(400).json({
+      message: 'Email and password are required.',
       success: false,
       error: true,
     });
   }
 
-  const user = await UserModel.findOne({ email: email }).select('+password');
+  const user = await UserModel.findOne({ email }).select('+password');
 
   if (!user) {
-    return res.status(403).json({
+    return res.status(404).json({
       message: 'User not found. Please register.',
       success: false,
       error: true,
@@ -77,18 +91,24 @@ export async function login(req, res) {
   }
 
   const isMatch = await bcrypt.compare(password, user.password);
-
   if (!isMatch) {
-    return res.status(400).json({
+    return res.status(401).json({
       message: 'Invalid email or password',
       success: false,
       error: true,
     });
   }
 
-  const token = jwt.sign({ email: user.email, _id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: '24h',
-  });
+  const token = await user.generateJwtToken();
+  if (!token) {
+    return res.status(402).json({
+      message: 'Token not generated',
+      success: false,
+      error: true,
+    });
+  }
+
+  res.cookie('accessToken', token, cookieOption);
 
   return res.status(200).json({
     message: 'Login successful',
@@ -98,30 +118,25 @@ export async function login(req, res) {
       id: user._id,
       name: user.name,
       email: user.email,
-      token: token,
     },
   });
 }
 
 //Logout
 export async function logout(req, res) {
-  const userId = req.userId;
+  const userId = req.user;
 
   if (!userId) {
     return res.status(400).json({ message: 'Please provide user ID' });
   }
 
-  const cookieOption = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-  };
 
   res.clearCookie('accessToken', cookieOption);
 
   return res.status(200).json({
     message: 'Logout successful',
     success: true,
+    error: false,
   });
 }
 
