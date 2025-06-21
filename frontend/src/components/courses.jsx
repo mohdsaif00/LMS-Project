@@ -4,23 +4,23 @@ export default function Courses() {
   const [category, setCategory] = useState('Development');
 
   const filteredCourses = [
-   
+
     {
       id: 1,
       category: 'Development',
-      name:'JavaScript',
+      name: 'JavaScript',
       level: 'Intermediate',
       title: 'How to easily create a website with',
       author: 'Claire Evans',
       rating: 4.5,
-      reviews:"9,300",
+      reviews: "9,300",
       price: '₹350.00',
       image: 'https://img.icons8.com/?size=100&id=39854&format=png&color=FFFFFF',
     },
     {
       id: 2,
       category: 'Development',
-      name:'CSS3',
+      name: 'CSS3',
       level: 'Beginner',
       title: 'CSS: ultimate CSS course from',
       author: 'Carolyn Welborn',
@@ -33,19 +33,19 @@ export default function Courses() {
     {
       id: 3,
       category: 'Development',
-      name:'HTML',
+      name: 'HTML',
       level: 'Intermediate',
       title: 'HTML: ultimate HTML course from',
       author: 'Claire Evans',
       rating: 4.5,
-      reviews:"13,200",
+      reviews: "13,200",
       price: '₹450.00',
       image: 'https://img.icons8.com/?size=100&id=10428&format=png&color=FFFFFF',
     },
     {
       id: 4,
       category: 'Development',
-      name:'Gatsby',
+      name: 'Gatsby',
       level: 'Intermediate',
       title: 'The Gatsby Course: build web',
       author: 'Floyd Amall',
@@ -57,7 +57,7 @@ export default function Courses() {
     {
       id: 5,
       category: 'Design',
-      name:'JavaScript',
+      name: 'JavaScript',
       level: 'Intermediate',
       title: 'How to easily create a website with',
       author: 'Claire Evans',
@@ -69,7 +69,7 @@ export default function Courses() {
     {
       id: 6,
       category: 'Design',
-      name:'JavaScript',
+      name: 'JavaScript',
       level: 'Intermediate',
       title: 'How to easily create a website with',
       author: 'Claire Evans',
@@ -77,12 +77,12 @@ export default function Courses() {
       reviews: 9300,
       price: '₹300.00',
       image: 'https://img.icons8.com/color/48/javascript.png',
-      
+
     },
     {
       id: 7,
       category: 'Design',
-      name:'JavaScript',
+      name: 'JavaScript',
       level: 'Intermediate',
       title: 'How to easily create a website with',
       author: 'Claire Evans',
@@ -90,12 +90,12 @@ export default function Courses() {
       reviews: 9300,
       price: '₹300.00',
       image: 'https://img.icons8.com/color/48/javascript.png',
-      
+
     },
     {
       id: 8,
       category: 'Design',
-      name:'JavaScript',
+      name: 'JavaScript',
       level: 'Intermediate',
       title: 'How to easily create a website with',
       author: 'Claire Evans',
@@ -103,18 +103,18 @@ export default function Courses() {
       reviews: 9300,
       price: '₹300.00',
       image: 'https://img.icons8.com/color/48/javascript.png',
-      
+
     },
-    
-    
+
+
   ];
   const bgColors = {
-  JavaScript: 'bg-yellow-400',
-  CSS3: 'bg-blue-800',
-  HTML: 'bg-orange-500',
-  Gatsby: 'bg-purple-600',
- 
-};
+    JavaScript: 'bg-yellow-400',
+    CSS3: 'bg-blue-800',
+    HTML: 'bg-orange-500',
+    Gatsby: 'bg-purple-600',
+
+  };
 
 
   const renderCard = (course) => (
@@ -123,7 +123,7 @@ export default function Courses() {
         <div className='flex justify-center items-center '>
           <img src={course.image} alt="JavaScript" className="h-10 w-10" />
         </div>
-        
+
         <p className="font-semibold mt-2 text-white text-center text-xl">{course.name}</p>
       </div>
       <div className="p-4">
@@ -135,7 +135,7 @@ export default function Courses() {
           <span className="text-gray-400 ml-1">({course.reviews})</span>
         </div>
         <div className="mt-4 text-sm font-semibold">{course.price}</div>
-        <a href="#"className="mt-1 text-indigo-600 flex items-center text-sm">
+        <a href="#" className="mt-1 text-indigo-600 flex items-center text-sm">
           <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
           </svg>
@@ -143,7 +143,7 @@ export default function Courses() {
         </a>
       </div>
     </div>
-    
+
   );
 
   return (
@@ -154,9 +154,8 @@ export default function Courses() {
           <button
             key={cat}
             onClick={() => setCategory(cat)}
-            className={`text-gray-700 hover:border-b-2 border-purple-600 font-medium mb-2 pb-2 hover:text-purple-600 ${
-              category === cat ? 'border-b-2 text-purple-600' : ''
-            }`}
+            className={`text-gray-700 hover:border-b-2 border-purple-600 font-medium mb-2 pb-2 hover:text-purple-600 ${category === cat ? 'border-b-2 text-purple-600' : ''
+              }`}
           >
             {cat}
           </button>

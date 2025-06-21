@@ -1,28 +1,73 @@
-import {Link}  from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { useState } from 'react';
+
 function Header() {
+    const { user, logout } = useAuth();
+    const [showDropdown, setShowDropdown] = useState(false);
+
+    const toggleDropdown = () => {
+        setShowDropdown(!showDropdown);
+            setTimeout(() => {
+      setShowDropdown(false);
+    }, 6000);
+    };
+
     return (
-        <nav className="min-h-xl flex items-center justify-around bg-white shadow-md py-2  ">
-            <div className="flex justify-around gap-60">
-                <div className="flex gap-20">
-                    <a href="#">
-                        <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/c4e056b6-23b3-41d0-8200-93f445bac86c.png" alt="logo" className="w-40" />
-                    </a>
+        <nav className="min-h-xl flex items-center justify-around bg-white shadow-md py-2">
+            <div className="flex justify-around gap-72">
+                <Link to="/">
+                    <img src="https://cdn-editing-temp.picsart.com/editing-temp-landings/c4e056b6-23b3-41d0-8200-93f445bac86c.png" alt="Logo" className="w-40" />
+                </Link>
+
+                <div className="flex items-center space-x-20">
+                    <Link to="/" className="font-medium hover:text-purple-600">Home</Link>
+                    <Link to="/courses" className="font-medium hover:text-purple-600">Courses</Link>
+                    <Link to="/contact" className="font-medium hover:text-purple-600">Contact</Link>
                 </div>
-                <div className="flex items-center justify-center space-x-20">
-                    <Link to="#" className="font-medium hover:text-purple-600">Home </Link>
-                    <Link to="#" className="font-medium hover:text-purple-600"> Courses </Link>
-                    <Link to="#" className="font-medium hover:text-purple-600"> Contact</Link>
-                </div>
-                <div className="flex items-center justify-center space-x-6">
-                    <Link to="/login" className="border border-purple-600 text-purple-600 px-4 py-2 rounded hover:bg-purple-500 hover:text-white">
-                        Sign In
-                    </Link>
-                    <Link to="/register" className="border border-purple-600 text-white px-4 py-2 rounded bg-purple-600 hover:bg-purple-700">
-                        Sign up
-                    </Link>
+
+                <div className="relative flex items-center space-x-4 ">
+                    {user ? (
+                        <>
+                            <button
+                                onClick={toggleDropdown}
+                                className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-100 text-purple-600 font-bold focus:outline-none ml-28" >
+                                <span>{user.name.slice(0, 2).toUpperCase()}</span>
+                            </button>
+
+
+                            {showDropdown && (
+                                <div className="absolute right-0 p-4 top-full mt-2 w-48 bg-white border rounded-xl shadow-md z-10">
+                                    <Link
+                                        to="/profile"
+                                        className="block px-4 py-2 text-sm hover:bg-gray-100"
+                                        onClick={() => setShowDropdown(false)}>
+                                        Profile
+                                    </Link>
+                                    <Link
+                                        to="/profile"
+                                        className="block px-4 py-2 text-sm hover:bg-gray-100"
+                                        onClick={() => setShowDropdown(false)}>
+                                        Dashboard
+                                    </Link>
+                                    <button
+                                        onClick={() => { logout(); setShowDropdown(false); }}
+                                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                                        Logout
+                                    </button>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            <Link to="/login" className="border border-purple-600 text-purple-600 px-4 py-2 rounded hover:bg-purple-500 hover:text-white">Sign In</Link>
+                            <Link to="/register" className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Sign Up</Link>
+                        </>
+                    )}
                 </div>
             </div>
         </nav>
     );
 }
+
 export default Header;
