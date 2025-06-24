@@ -8,6 +8,7 @@ const cookieOption = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
   sameSite: 'strict',
+  maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
 // Register
@@ -53,8 +54,6 @@ export async function register(req, res) {
   res.cookie('accessToken', token, cookieOption);
 
   await newUser.save();
-
-
 
   return res.status(200).json({
     message: 'User registered successfully',
@@ -129,7 +128,6 @@ export async function logout(req, res) {
   if (!userId) {
     return res.status(400).json({ message: 'Please provide user ID' });
   }
-
 
   res.clearCookie('accessToken', cookieOption);
 
