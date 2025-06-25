@@ -6,6 +6,7 @@ import {
   forgotPassword,
   verifyOtp,
   resetPassword,
+  changePassword,
 } from '../controllers/user.controller.js';
 import { isAuthenticated } from '../middlewares/auth.middleware.js';
 
@@ -17,5 +18,6 @@ userRouter.post('/logout', isAuthenticated, logout);
 userRouter.post('/forgot-password', forgotPassword);
 userRouter.post('/verify-otp', verifyOtp);
 userRouter.post('/reset-password', resetPassword);
+userRouter.post('/change-password', isAuthenticated, changePassword);
 
 export default userRouter;

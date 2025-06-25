@@ -8,7 +8,8 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-export const addCourse = async (req, res) => {
+//Add Courses
+export async function addCourse(req, res) {
   try {
     const { title, description, category, createdBy } = req.body;
 
@@ -16,17 +17,9 @@ export const addCourse = async (req, res) => {
       return res.status(400).json({
         message: 'Provide all the details.',
         success: false,
+        error: true,
       });
     }
-
-    // const existingCourse = await CourseModel.findOne({ title });
-    // if (existingCourse) {
-    //   return res.status(401).json({
-    //     message: 'Course already added. Please change title.',
-    //     success: false,
-    //     error: true,
-    //   });
-    // }
 
     const course = await CourseModel.create({
       title,
@@ -54,6 +47,7 @@ export const addCourse = async (req, res) => {
         return res.status(500).json({
           message: 'Thumbnail upload failed.',
           success: false,
+          error: true,
         });
       }
     }
@@ -61,15 +55,73 @@ export const addCourse = async (req, res) => {
     await course.save();
 
     return res.status(201).json({
+      message: 'Course added successfully',
       success: true,
-      message: 'Course created successfully',
+      error: false,
       course,
     });
   } catch (error) {
-    console.error('Server Error:', error);
+    return res.status(500).json({
+      message: 'Internal Server Error',
+      success: error.message,
+    });
+  }
+}
+
+//All Courses
+export async function getAllcourse(req, res) {
+  try {
+    const courses = await CourseModel.find({}).select('-lectures');
+
+    return res.status(200).json({
+      message: 'All Coures Details',
+      success: true,
+      error: false,
+      courses,
+    });
+  } catch (error) {
     return res.status(500).json({
       message: 'Internal Server Error',
       success: false,
+      error: error.message,
     });
   }
-};
+}
+
+//Get Course By Id
+export async function getCourseById(req, res) {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        message: 'Invalid course ID',
+        success: false,
+        error: true,
+      });
+    }
+
+    const course = await CourseModel.findById(id);
+
+    if (!course) {
+      return res.status(404).json({
+        message: 'Course not found',
+        success: false,
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Course Details',
+      success: true,
+      error: false,
+      course,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Something went wrong',
+      success: false,
+      error: error.message,
+    });
+  }
+}
