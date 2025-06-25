@@ -5,6 +5,7 @@ import connectionToDB from './config/dbConnection.js';
 import userRouter from './routes/user.route.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import courseRouter from './routes/course.route.js';
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', userRouter);
+app.use('/api/courses', courseRouter);
 
 app.listen(PORT, async () => {
   await connectionToDB();

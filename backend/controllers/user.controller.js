@@ -8,6 +8,7 @@ const cookieOption = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
   sameSite: 'strict',
+  maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
 // Register
@@ -276,4 +277,56 @@ export async function resetPassword(req, res) {
       error: true,
     });
   }
+}
+
+//Change Password
+export async function changePassword(req, res) {
+  const { oldPassword, newPassword } = req.body;
+  const { id } = req.user;
+
+  if (!oldPassword || !newPassword) {
+    return res.status(400).json({
+      message: 'Old password and new password are required.',
+      success: false,
+      error: true,
+    });
+  }
+  if (oldPassword == newPassword) {
+    return res.status(400).json({
+      message: 'Old and New password are same please change password.',
+      success: false,
+      error: true,
+    });
+  }
+
+  const user = await UserModel.findById(id).select('+password');
+
+  if (!user) {
+    return res.status(404).json({
+      message: 'User not found.',
+      success: false,
+      error: true,
+    });
+  }
+
+  const passwordValid = await user.compare(oldPassword);
+
+  if (!passwordValid) {
+    return res.status(400).json({
+      message: 'Old password is incorrect.',
+      success: false,
+      error: true,
+    });
+  }
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  user.password = hashedPassword;
+
+  await user.save();
+
+  res.status(200).json({
+    message: 'Password changed successfully.',
+    success: true,
+    error: false,
+  });
 }

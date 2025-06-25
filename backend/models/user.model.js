@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -17,7 +18,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please Provide a Password'],
     trim: true,
-    minLength: [8, 'Provide atleast 8 digit password '],
+    minLength: [6, 'Provide atleast 6 digit password '],
     select: false,
   },
   phone: {
@@ -53,6 +54,13 @@ userSchema.methods = {
       }
     );
   },
+<<<<<<< HEAD
+=======
+};
+
+userSchema.methods.compare = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+>>>>>>> 9decddf327221cc20a9e9bcc05494a2b83936e4a
 };
 
 const UserModel = mongoose.model('User', userSchema);
