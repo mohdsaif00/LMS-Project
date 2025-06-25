@@ -125,3 +125,50 @@ export async function getCourseById(req, res) {
     });
   }
 }
+
+// Update course — only by creator OR admin
+export async function updateCourse (req, res)  {
+  try {
+    const { title, description, price } = req.body;
+    const course = await Course.findById(req.params.id);
+
+    if (!course) return res.status(404).json({ message: "Course not found" });
+
+    const isOwner = course.creator.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === "admin";
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: "You can't update this course" });
+    }
+
+    course.title = title || course.title;
+    course.description = description || course.description;
+    course.price = price || course.price;
+
+    await course.save();
+
+    res.json({ message: "Course updated", course });
+  } catch (err) {
+    res.status(500).json({ message: "Error updating course" });
+  }
+};
+
+// Delete course — only by creator OR admin
+export async function deleteCourse (req, res) {
+  try {
+    const course = await Course.findById(req.params.id);
+    if (!course) return res.status(404).json({ message: "Course not found" });
+
+    const isOwner = course.creator.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === "admin";
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: "You can't delete this course" });
+    }
+
+    await course.deleteOne();
+    res.json({ message: "Course deleted" });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting course" });
+  }
+};
