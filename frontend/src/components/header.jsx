@@ -35,7 +35,6 @@ function Header() {
                                 <span>{user.name.slice(0, 2).toUpperCase()}</span>
                             </button>
 
-
                             {showDropdown && (
                                 <div className="absolute right-0 p-4 top-full mt-2 w-48 bg-white border rounded-xl shadow-md z-10">
                                     <Link
@@ -60,8 +59,8 @@ function Header() {
                         </>
                     ) : (
                         <>
-                            <Link to="/login" className="border border-purple-600 text-purple-600 px-4 py-2 rounded hover:bg-purple-500 hover:text-white">Sign In</Link>
-                            <Link to="/register" className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">Sign Up</Link>
+                            <Link to="/login" className="border border-purple-600 text-purple-600 px-4 py-2 rounded-md hover:bg-purple-500 hover:text-white">Sign In</Link>
+                            <Link to="/register" className="bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700">Sign Up</Link>
                         </>
                     )}
                 </div>

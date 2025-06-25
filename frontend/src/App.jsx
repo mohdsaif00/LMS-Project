@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import ForgotPassword from './components/Forgotpass'
 import ResetPassword from './components/ResetPass'
 import AdminDashboard from './pages/AdminDashboard'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/admindashboard" element={<AdminDashboard />} />
       </Routes>
+      <ToastContainer/>
     </>
 
 

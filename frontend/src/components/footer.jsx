@@ -57,7 +57,7 @@ export default function Footer() {
             </div>
 
             <div className="border-t mt-10 pt-5 text-center text-sm text-gray-500">
-                <p>&copy;; 2025 Geeks-UI</p>
+                <p>&copy;; 2025 UpSkills-UI</p>
                 <div className="flex justify-center space-x-4 mt-2">
                     <a href="#">Privacy Policy</a>
                     <a href="#"> Cookie Notice</a>

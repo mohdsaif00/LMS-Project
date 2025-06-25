@@ -138,7 +138,7 @@ export default function AdminDashboard() {
                                         <input type="number" placeholder="Course Price" className="w-full p-2 border rounded" />
                                         <input type="number" placeholder="Discount %" className="w-full p-2 border rounded" />
                                     </div>
-                                    <input type="file" className="w-full" />
+                                    <input type="file" className="w-[50%]" />
                                     <button type="button" className="w-full bg-blue-100 text-blue-700 py-2 rounded">+ Add Chapter</button>
                                     <button type="submit" className="w-full bg-black text-white py-2 rounded">ADD</button>
                                 </form>

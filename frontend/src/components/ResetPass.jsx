@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { handleError, handleSuccess } from '../utils/handleMessage';
 
 export default function ResetPassword() {
-
     const navigate = useNavigate();
+    const location = useLocation();
+    const emailFromState = location.state?.email || "";
+
     const [resetPassData, setResetPassData] = useState({
-        email: "",
+        email: emailFromState,
         password: "",
         confirmPass: ""
     });
@@ -22,14 +24,18 @@ export default function ResetPassword() {
         const { email, password, confirmPass } = resetPassData;
 
         if (!email || !password || !confirmPass) {
-            return handleError("All field are required");
+            return handleError("All fields are required");
+        }
+
+        if (password !== confirmPass) {
+            return handleError("Passwords do not match");
         }
 
         try {
             const response = await fetch("http://localhost:5000/api/reset-password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(resetPassData),
+                body: JSON.stringify({ email, password, confirmPass }),
             });
 
             const data = await response.json();
@@ -49,11 +55,10 @@ export default function ResetPassword() {
         }
     };
 
-
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
-            <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md ">
-                <div className='flex justify-end '>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+                <div className='flex justify-end'>
                     <img
                         src="https://uploads.onecompiler.io/42zhuec4k/43n7479rc/close.png"
                         alt="Cut"
@@ -61,26 +66,49 @@ export default function ResetPassword() {
                         onClick={() => navigate(-1)}
                     />
                 </div>
+
                 <form className="space-y-4 p-4" onSubmit={handleSubmit}>
                     <h2 className="text-2xl font-bold flex items-center justify-center">Reset Password</h2>
-                    <div>
-                        <label className="block font-semibold" htmlFor="email">Email</label>
-                        <input id="email" type="email" name='email' placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={resetPassData.email} required />
-                    </div>
+
                     <div>
                         <label className="block font-semibold" htmlFor="password">New Password</label>
-                        <input id="password" type="text" name='password' minLength="6" maxLength="15" placeholder="Enter your password" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={resetPassData.password} required />
+                        <input
+                            id="password"
+                            type="text"
+                            name='password'
+                            minLength="6"
+                            maxLength="15"
+                            placeholder="Enter new password"
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            onChange={handleChange}
+                            value={resetPassData.password}
+                            required
+                        />
                     </div>
+
                     <div>
                         <label className="block font-semibold" htmlFor="confirmPassword">Confirm Password</label>
-                        <input id="confirmPassword" type="text" name='confirmPass' minLength="6" maxLength="15" placeholder="Enter confirm password" className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" onChange={handleChange} value={resetPassData.confirmPass} required />
+                        <input
+                            id="confirmPassword"
+                            type="text"
+                            name='confirmPass'
+                            minLength="6"
+                            maxLength="15"
+                            placeholder="Confirm password"
+                            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            onChange={handleChange}
+                            value={resetPassData.confirmPass}
+                            required
+                        />
                     </div>
 
-                    <button className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition hover:scale-105" type="submit" >Reset</button>
+                    <button
+                        className="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700 transition hover:scale-105"
+                        type="submit"
+                    >
+                        Reset
+                    </button>
                 </form>
-
-
-
             </div>
         </div>
     );
