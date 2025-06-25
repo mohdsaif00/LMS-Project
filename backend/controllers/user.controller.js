@@ -54,8 +54,6 @@ export async function register(req, res) {
 
   await newUser.save();
 
-
-
   return res.status(200).json({
     message: 'User registered successfully',
     success: true,
@@ -129,7 +127,6 @@ export async function logout(req, res) {
   if (!userId) {
     return res.status(400).json({ message: 'Please provide user ID' });
   }
-
 
   res.clearCookie('accessToken', cookieOption);
 
@@ -225,47 +222,58 @@ export async function verifyOtp(req, res) {
 }
 
 // Reset Password
-// Step 2: Reset Password after OTP is verified
+// Reset Password after OTP is verified
 export async function resetPassword(req, res) {
-  const { email, password, confirmPass } = req.body;
+  const { email, password } = req.body; // Removed confirmPass
 
-  if (!email || !password || !confirmPass) {
+  if (!email || !password) {
     return res.status(400).json({
-      message: 'Email, password, and confirm password are required.',
+      message: 'All fields are required',
       success: false,
       error: true,
     });
   }
 
-  if (password !== confirmPass) {
-    return res.status(400).json({
-      message: 'Passwords do not match.',
+  try {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        message: 'If account exists, password reset link sent', // Generic message
+        success: false,
+        error: true,
+      });
+    }
+
+    // Additional security check - verify OTP was previously verified
+    if (user.resetOtp || user.resetOtpExp) {
+      return res.status(401).json({
+        message: 'OTP verification required first',
+        success: false,
+        error: true,
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.password = hashedPassword;
+    await user.save();
+
+    // Clear any reset tokens
+    user.resetOtp = undefined;
+    user.resetOtpExp = undefined;
+    await user.save();
+
+    return res.status(200).json({
+      message: 'Password updated successfully',
+      success: true,
+      error: false,
+    });
+  } catch (error) {
+    console.error('Reset password error:', error);
+    return res.status(500).json({
+      message: 'Internal server error',
       success: false,
       error: true,
     });
   }
-
-  const user = await UserModel.findOne({ email });
-
-  if (!user) {
-    return res.status(404).json({
-      message: 'User not found.',
-      success: false,
-      error: true,
-    });
-  }
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  user.password = hashedPassword;
-  user.resetOtp = undefined;
-  user.resetOtpExp = undefined;
-
-  await user.save();
-
-  res.status(200).json({
-    message: 'Password successfully updated.',
-    success: true,
-    error: false,
-  });
 }

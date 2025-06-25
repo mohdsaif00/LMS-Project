@@ -15,7 +15,7 @@ export const isAuthenticated = async (req, res, next) => {
 
   try {
     const userDetails = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = userDetails; 
+    req.user = userDetails;
     next();
   } catch (err) {
     return res.status(401).json({

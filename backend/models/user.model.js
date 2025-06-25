@@ -44,7 +44,7 @@ userSchema.methods = {
         id: this._id,
         email: this.email,
         name: this.name,
-        token:this.token,
+        token: this.token,
         role: this.role,
       },
       process.env.JWT_SECRET,
@@ -52,7 +52,7 @@ userSchema.methods = {
         expiresIn: process.env.JWT_EXPIRY || '24h',
       }
     );
-  }
+  },
 };
 
 const UserModel = mongoose.model('User', userSchema);
