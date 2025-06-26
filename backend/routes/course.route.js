@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { getAllcourse, addCourse, getCourseById } from '../controllers/course.controller.js';
+import {
+  getAllcourse,
+  addCourse,
+  getCourseById,
+  deleteCourseById,
+  updateCourseById,
+} from '../controllers/course.controller.js';
 import { upload } from '../middlewares/multer.middleware.js';
 import { authorizedRole, isAuthenticated } from '../middlewares/auth.middleware.js';
 
@@ -13,5 +19,7 @@ courseRouter.post(
   addCourse
 );
 courseRouter.get('/getCourse/:id', isAuthenticated, getCourseById);
+courseRouter.post('/deleteCourse/:id', isAuthenticated, authorizedRole('ADMIN'), deleteCourseById);
+courseRouter.post('/updateCourse/:id', isAuthenticated, authorizedRole('ADMIN'), updateCourseById);
 
 export default courseRouter;

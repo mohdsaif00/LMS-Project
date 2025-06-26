@@ -125,3 +125,91 @@ export async function getCourseById(req, res) {
     });
   }
 }
+
+//Delete Course
+export async function deleteCourseById(req, res) {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        message: 'Invalid course ID',
+        success: false,
+        error: true,
+      });
+    }
+
+    const course = await CourseModel.findById(id);
+
+    if (!course) {
+      return res.status(404).json({
+        message: 'Course not found',
+        success: false,
+        error: true,
+      });
+    }
+
+    await course.deleteOne();
+
+    return res.status(200).json({
+      message: 'Course Deleted Successfully',
+      success: true,
+      error: false,
+      course: {
+        id: course._id,
+        title: course.title,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Something went wrong',
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
+//Update course
+export async function updateCourseById(req, res) {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        message: 'Invalid course ID',
+        success: false,
+        error: true,
+      });
+    }
+
+    const course = await CourseModel.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!course) {
+      return res.status(404).json({
+        message: 'Course not found',
+        success: false,
+        error: true,
+      });
+    }
+
+    return res.status(200).json({
+      message: 'Course updated successfully',
+      success: true,
+      error: false,
+      course,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Something went wrong',
+      success: false,
+      error: error.message,
+    });
+  }
+}
