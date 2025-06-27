@@ -36,6 +36,18 @@ const userSchema = new mongoose.Schema({
   resetOtpExp: {
     type: Date,
   },
+  age:{
+    type: Number,
+    default:null
+  },
+  state:{
+    type: String,
+    default:''
+  },
+  qualification:{
+    type: String,
+    default:''
+  }
 });
 
 userSchema.methods = {

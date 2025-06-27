@@ -156,7 +156,7 @@ export async function forgotPassword(req, res) {
   const otp = Math.floor(100000 + Math.random() * 900000);
 
   user.resetOtp = otp;
-  user.resetOtpExp = new Date(Date.now() + 10 * 60 * 1000); 
+  user.resetOtpExp = new Date(Date.now() + 10 * 60 * 1000);
   await user.save();
 
   await mailer.sendMail({
@@ -223,8 +223,7 @@ export async function verifyOtp(req, res) {
   });
 }
 
-// Reset Password
-// Step 2: Reset Password after OTP is verified
+//Reset Password after OTP is verified
 export async function resetPassword(req, res) {
   const { email, password, confirmPass } = req.body;
 
@@ -319,4 +318,27 @@ export async function changePassword(req, res) {
     success: true,
     error: false,
   });
+}
+
+//getProfile
+export async function getProfile(req, res) {
+  const user = await UserModel.findOne(req.user.id).select("-password");
+  res.json(user) 
+}
+
+//update profile
+export async function updateProfile(req, res) {
+  const {age, state , qualification} = req.body;
+  const user = await UserModel.findById(req.user.id);
+
+  if(user){
+    user.age = age || user.age;
+    user.state = state || user.state;
+    user.qualification = qualification || user.qualification;
+    await user.save();
+
+    res.json({message: "profile updated successfully"})
+  }else{
+    res.status(404).json({message:"user not found"})
+  }
 }

@@ -18,6 +18,9 @@ app.use(
 app.use(cookieParser());
 const PORT = process.env.PORT;
 
+const paymentRoutes =require('./routes/payment.route.js')
+app.use('/api/payment', paymentRoutes);
+
 app.get('/', (req, res) => {
   res.send('This is home page');
 });

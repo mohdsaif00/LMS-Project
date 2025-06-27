@@ -8,6 +8,7 @@ import AdminDashboard from './pages/AdminDashboard'
 import { ToastContainer } from 'react-toastify'
 import UserDashboard from './pages/UserDashboard'
 import Course from './pages/course'
+import Profile from './pages/Profile'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/course" element={<Course/>}/>
         <Route path="/admindashboard" element={<AdminDashboard />} />
         <Route path="/userdashboard" element={<UserDashboard />} />
+        <Route path= "/profile" element={<Profile />} />
       </Routes>
       <ToastContainer/>
     </>
