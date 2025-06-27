@@ -14,7 +14,6 @@ courseRouter.get('/getAllcourse', isAuthenticated, getAllcourse);
 courseRouter.post(
   '/add-course',
   isAuthenticated,
-  authorizedRole('ADMIN'),
   upload.single('thumbnail'),
   addCourse
 );

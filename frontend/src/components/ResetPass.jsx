@@ -24,11 +24,11 @@ export default function ResetPassword() {
         const { email, password, confirmPass } = resetPassData;
 
         if (!email || !password || !confirmPass) {
-            return handleError("All fields are required");
+            return handleError("Please forgot your password");
         }
 
         if (password !== confirmPass) {
-            return handleError("Passwords do not match");
+            return handleError(message);
         }
 
         try {

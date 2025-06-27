@@ -5,14 +5,13 @@ const courseSchema = new mongoose.Schema(
     title: {
       type: String,
       required: [true, 'Course title is required'],
-      minLength: [8, 'Title must be at least 8 characters'],
       maxLength: [60, 'Title must be less than 60 characters'],
       trim: true,
     },
     description: {
       type: String,
       required: [true, 'Description is required'],
-      minLength: [8, 'Description must be at least 8 characters'],
+      minLength: [6, 'Description must be at least 8 characters'],
       maxLength: [300, 'Description must be less than 300 characters'],
       trim: true,
     },
@@ -30,6 +29,11 @@ const courseSchema = new mongoose.Schema(
         type: String,
         required: [true, 'Thumbnail URL is required'],
       },
+    },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", // or "Instructor"
+      required: true
     },
     lectures: [
       {

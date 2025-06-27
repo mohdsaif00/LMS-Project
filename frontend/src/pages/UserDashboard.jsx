@@ -1,84 +1,9 @@
-import { Link, Navigate } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { handleError, handleSuccess } from '../utils/handleMessage';
 
-export default function AdminDashboard() {
-    const [activeTab, setActiveTab] = useState('dashboard');
-    const { user } = useAuth();
-    const fileInputRef = useRef(null);
-    const [loading, setLoading] = useState(false);
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-    const [formData, setFormData] = useState({
-        title: "",
-        description: "",
-        category: "",
-        createdBy: "",
-    });
-
-    const [thumbnail, setThumbnail] = useState(null);
-
-    useEffect(() => {
-        if (user?.id) {
-            setFormData(prev => ({ ...prev, createdBy: user.id }));
-        }
-    }, [user]);
-
-    if (!user) {
-        return <Navigate to="/login" replace />;
-    }
-
-    const handleInputChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-    };
-
-    const handleFileChange = (e) => {
-        setThumbnail(e.target.files[0]);
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        const data = new FormData();
-        data.append("title", formData.title);
-        data.append("description", formData.description);
-        data.append("category", formData.category);
-        data.append("createdBy", user.id);
-
-        if (thumbnail) {
-            data.append("thumbnail", thumbnail);
-        }
-
-        try {
-            const res = await fetch("http://localhost:5000/api/courses/add-course", {
-                method: "POST",
-                credentials: "include",
-                body: data,
-            });
-
-            const result = await res.json();
-
-            if (!res.ok) throw new Error(result.message);
-            handleSuccess("Course added successfully");
-            setFormData({
-                title: "",
-                description: "",
-                category: "",
-                createdBy: user._id, // keep it since it's needed
-            });
-            setThumbnail(null);
-            if (fileInputRef.current) {
-                fileInputRef.current.value = "";
-            }
-            setLoading(false);
-        } catch (err) {
-            console.error("Submit error:", err);
-            handleError(err.message || "Something went wrong");
-        }
-    };
+export default function UserDashboard() {
+    const [activeTab, setActiveTab] = useState('dashboard'); // default tab
 
     return (
         <>
@@ -112,7 +37,7 @@ export default function AdminDashboard() {
                                 }`}>
                                 <button className="flex items-center gap-2" >
                                     <img
-                                        src="https://uploads.onecompiler.io/42zhuec4k/43nzupqeq/add-post-icon-line-icon-vector-Picsart-BackgroundRemover.jpg"
+                                        src="https://uploads.onecompiler.io/42zhuec4k/43nwqqfqs/add-post-icon-line-icon-vector.jpg"
                                         alt="Add course Icon" className="w-5 h-5"
                                     /> Add Course
                                 </button>
@@ -206,32 +131,16 @@ export default function AdminDashboard() {
                         {activeTab === 'addCourse' && (
                             <div className="bg-white p-6 rounded-lg shadow w-full max-w-xl">
                                 <h1 className="text-xl font-semibold mb-4">Add Course</h1>
-                                <form className="space-y-4" onSubmit={handleSubmit}>
-                                    <input name="title" value={formData.title}
-                                        onChange={handleInputChange}
-                                        placeholder="Course Title"
-                                        className="w-full p-2 border rounded"
-                                    />
-                                    <textarea name="description" placeholder="Course Description"
-                                        value={formData.description}
-                                        onChange={handleInputChange}
-                                        className="w-full p-2 border rounded"
-                                    />
-                                    <input type="text" name="category"
-                                        placeholder="Course Category" value={formData.category}
-                                        onChange={handleInputChange} className="w-full p-2 border rounded"
-                                    />
-                                    <input type="file" onChange={handleFileChange}
-                                        ref={fileInputRef} className="w-[50%]"
-                                    />
-                                    <button
-                                        type="submit"
-                                        className="w-full bg-black text-white py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-                                        disabled={loading}
-                                    >
-                                        {loading ? "Adding..." : "Add"}
-                                    </button>
-
+                                <form className="space-y-4">
+                                    <input type="text" placeholder="Course Title" className="w-full p-2 border rounded" />
+                                    <textarea placeholder="Course Description" className="w-full p-2 border rounded"></textarea>
+                                    <div className="flex gap-4">
+                                        <input type="number" placeholder="Course Price" className="w-full p-2 border rounded" />
+                                        <input type="number" placeholder="Discount %" className="w-full p-2 border rounded" />
+                                    </div>
+                                    <input type="file" className="w-[50%]" />
+                                    <button type="button" className="w-full bg-blue-100 text-blue-700 py-2 rounded">+ Add Chapter</button>
+                                    <button type="submit" className="w-full bg-black text-white py-2 rounded">ADD</button>
                                 </form>
                             </div>
                         )}

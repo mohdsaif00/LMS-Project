@@ -9,7 +9,7 @@ export default function ForgotPassword() {
     const [showOtpField, setShowOtpField] = useState(false);
     const [otp, setOtp] = useState("");
     const [resendCooldown, setResendCooldown] = useState(0);
-    const [loading, setLoading] = useState(false); // <-- loading state
+    const [loading, setLoading] = useState(false); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;

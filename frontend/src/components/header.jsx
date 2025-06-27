@@ -1,16 +1,20 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 function Header() {
     const { user, logout } = useAuth();
     const [showDropdown, setShowDropdown] = useState(false);
+    const navigate = useNavigate();
+
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
-            setTimeout(() => {
-      setShowDropdown(false);
-    }, 6000);
+        setTimeout(() => {
+            setShowDropdown(false);
+        }, 6000);
     };
 
     return (
@@ -43,20 +47,24 @@ function Header() {
                                         onClick={() => setShowDropdown(false)}>
                                         Profile
                                     </Link>
-                                    <Link
-                                        to="/profile"
-                                        className="block px-4 py-2 text-sm hover:bg-gray-100"
-                                        onClick={() => setShowDropdown(false)}>
+
+                                    <button onClick={() => {
+                                        const dashboardPath = user.role === "ADMIN" ? "/admindashboard" : "/userdashboard";
+                                        navigate(dashboardPath);
+                                        
+                                        setShowDropdown(false); }}
+                                        className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100" >
                                         Dashboard
-                                    </Link>
-                                    <button
-                                        onClick={() => { logout(); setShowDropdown(false); }}
-                                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                                    </button>
+
+                                    <button onClick={() => { logout(); setShowDropdown(false); }}
+                                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100" >
                                         Logout
                                     </button>
                                 </div>
                             )}
                         </>
+
                     ) : (
                         <>
                             <Link to="/login" className="border border-purple-600 text-purple-600 px-4 py-2 rounded-md hover:bg-purple-500 hover:text-white">Sign In</Link>

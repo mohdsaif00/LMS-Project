@@ -117,6 +117,7 @@ export async function login(req, res) {
       id: user._id,
       name: user.name,
       email: user.email,
+      role: user.role,
     },
   });
 }
@@ -155,11 +156,11 @@ export async function forgotPassword(req, res) {
   const otp = Math.floor(100000 + Math.random() * 900000);
 
   user.resetOtp = otp;
-  user.resetOtpExp = new Date(Date.now() + 10 * 60 * 1000); // 10 mins
+  user.resetOtpExp = new Date(Date.now() + 10 * 60 * 1000); 
   await user.save();
 
   await mailer.sendMail({
-    from: process.env.SMTP_FROM_MAIL, // Your email address
+    from: process.env.SMTP_FROM_MAIL,
     to: user.email,
     subject: 'Reset Your Password',
     html: `<h3>Your password reset OTP is: ${otp}</h3>`,
