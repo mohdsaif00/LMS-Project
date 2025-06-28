@@ -20,6 +20,11 @@ const courseSchema = new mongoose.Schema(
       required: [true, 'Category is required'],
       trim: true,
     },
+    price: {
+      type: Number,
+      required: [true, 'Price is required'],
+      min: [0, 'Price must be at least 0'],
+    },
     thumbnail: {
       public_id: {
         type: String,
@@ -32,8 +37,8 @@ const courseSchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // or "Instructor"
-      required: true
+      ref: 'User', // or "Instructor"
+      required: true,
     },
     lectures: [
       {

@@ -11,9 +11,9 @@ cloudinary.config({
 //Add Courses
 export async function addCourse(req, res) {
   try {
-    const { title, description, category, createdBy } = req.body;
+    const { title, description, category, createdBy, price } = req.body;
 
-    if (!title || !description || !category || !createdBy) {
+    if (!title || !description || !category || !createdBy || !price) {
       return res.status(400).json({
         message: 'Provide all the details.',
         success: false,
@@ -25,6 +25,7 @@ export async function addCourse(req, res) {
       title,
       description,
       category,
+      price,
       createdBy,
       thumbnail: {
         public_id: 'Dummy',

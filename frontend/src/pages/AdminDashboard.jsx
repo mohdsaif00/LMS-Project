@@ -13,6 +13,7 @@ export default function AdminDashboard() {
         title: "",
         description: "",
         category: "",
+        price: "",
         createdBy: "",
     });
 
@@ -46,6 +47,7 @@ export default function AdminDashboard() {
         data.append("title", formData.title);
         data.append("description", formData.description);
         data.append("category", formData.category);
+        data.append("price", formData.price);
         data.append("createdBy", user.id);
 
         if (thumbnail) {
@@ -67,6 +69,7 @@ export default function AdminDashboard() {
                 title: "",
                 description: "",
                 category: "",
+                price: "",
                 createdBy: user._id, // keep it since it's needed
             });
             setThumbnail(null);
@@ -210,19 +213,26 @@ export default function AdminDashboard() {
                                     <input name="title" value={formData.title}
                                         onChange={handleInputChange}
                                         placeholder="Course Title"
-                                        className="w-full p-2 border rounded"
+                                        className="w-full p-2 border rounded" required
                                     />
                                     <textarea name="description" placeholder="Course Description"
                                         value={formData.description}
                                         onChange={handleInputChange}
-                                        className="w-full p-2 border rounded"
+                                        className="w-full p-2 border rounded" required
                                     />
+                                    <div className='flex space-x-4'>
                                     <input type="text" name="category"
                                         placeholder="Course Category" value={formData.category}
-                                        onChange={handleInputChange} className="w-full p-2 border rounded"
+                                        onChange={handleInputChange} className="w-full p-2 border rounded" required
                                     />
+                                    <input type="text" name="price"
+                                        placeholder="Enter price" value={formData.price}
+                                        onChange={handleInputChange} className="w-full p-2 border rounded" required
+                                    />
+                                    </div>
+
                                     <input type="file" onChange={handleFileChange}
-                                        ref={fileInputRef} className="w-[50%]"
+                                        ref={fileInputRef} className="w-[70%]"
                                     />
                                     <button
                                         type="submit"

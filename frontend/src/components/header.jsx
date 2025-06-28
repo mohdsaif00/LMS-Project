@@ -25,9 +25,9 @@ function Header() {
                 </Link>
 
                 <div className="flex items-center space-x-20">
-                    <Link to="/" className="font-medium hover:text-purple-600">Home</Link>
-                    <Link to="/courses" className="font-medium hover:text-purple-600">Courses</Link>
-                    <Link to="/contact" className="font-medium hover:text-purple-600">Contact</Link>
+                    <a href="/" className="font-medium hover:text-purple-600">Home</a>
+                    <a href="/#courses" className="font-medium hover:text-purple-600">Courses</a>
+                    <a href="/contact" className="font-medium hover:text-purple-600">Contact</a>
                 </div>
 
                 <div className="relative flex items-center space-x-4 ">

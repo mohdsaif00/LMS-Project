@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { mailer } from '../utils/nodemailer.js';
 import dotenv from 'dotenv';
 dotenv.config();
+import Razorpay from 'razorpay';
 
 const cookieOption = {
   httpOnly: true,
@@ -156,7 +157,7 @@ export async function forgotPassword(req, res) {
   const otp = Math.floor(100000 + Math.random() * 900000);
 
   user.resetOtp = otp;
-  user.resetOtpExp = new Date(Date.now() + 10 * 60 * 1000); 
+  user.resetOtpExp = new Date(Date.now() + 10 * 60 * 1000);
   await user.save();
 
   await mailer.sendMail({
@@ -319,4 +320,33 @@ export async function changePassword(req, res) {
     success: true,
     error: false,
   });
+}
+
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_SECRET,
+});
+
+//Create Order Controller
+export async function createOrder(req, res) {
+  const { amount } = req.body;
+
+  const options = {
+    amount: amount * 100, // convert to paisa
+    currency: 'INR',
+    receipt: 'receipt_order_' + Math.random().toString(36).substring(2, 10),
+  };
+
+  try {
+    const order = await razorpay.orders.create(options);
+    res.json({
+      success: true,
+      orderId: order.id,
+      amount: order.amount,
+      key: process.env.RAZORPAY_KEY_ID,
+    });
+  } catch (err) {
+    console.error('Order creation failed:', err);
+    res.status(500).json({ success: false, message: 'Something went wrong' });
+  }
 }

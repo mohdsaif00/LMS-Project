@@ -124,7 +124,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <section id="course" className="min-h-xl flex justify-center font-arial py-4">
+      <section id="courses" className="min-h-xl flex justify-center font-arial py-4">
         <div className="max-w-6xl p-4 pt-10 pb-20">
           <div>
             <h1 className='text-4xl text-center font-bold pt-1 '>Most Popular Courses</h1>
