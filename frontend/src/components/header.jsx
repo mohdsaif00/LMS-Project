@@ -41,13 +41,6 @@ function Header() {
 
                             {showDropdown && (
                                 <div className="absolute right-0 p-4 top-full mt-2 w-48 bg-white border rounded-xl shadow-md z-10">
-                                    <Link
-                                        to="/profile"
-                                        className="block px-4 py-2 text-sm hover:bg-gray-100"
-                                        onClick={() => setShowDropdown(false)}>
-                                        Profile
-                                    </Link>
-
                                     <button onClick={() => {
                                         const dashboardPath = user.role === "ADMIN" ? "/admindashboard" : "/userdashboard";
                                         navigate(dashboardPath);

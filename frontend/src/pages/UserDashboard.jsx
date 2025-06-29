@@ -1,58 +1,127 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
-function Profile() {
-  const [user, setUser] = useState({});
-  const [editMode, setEditMode] = useState(false);
-  const [form, setForm] = useState({ age: "", state: "", qualification: "" });
 
-  useEffect(() => {
-    axios.get("/api/user/profile", { headers: { Authorization: localStorage.getItem("token") } })
-      .then(res => {
-        setUser(res.data);
-        setForm({
-          age: res.data.age || "",
-          state: res.data.state || "",
-          qualification: res.data.qualification || ""
-        });
-      });
-  }, []);
+export default function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState('addCourse');
+  const [loading, setLoading] = useState(false);
 
-  const handleUpdate = () => {
-    axios.put("/api/user/profile", form, {
-      headers: { Authorization: localStorage.getItem("token") }
-    }).then(() => {
-      setEditMode(false);
-    });
-  };
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-5 border rounded shadow">
-      <div className="flex items-center gap-4">
-        <img src="/default-avatar.png" className="w-16 h-16 rounded-full" />
-        <button className="text-blue-500">Change</button>
-      </div>
-      <p><b>Full Name:</b> {user.name}</p>
-      <p><b>Email:</b> {user.email}</p>
-      <p><b>Phone:</b> {user.phone}</p>
+    <>
+      <nav className="w-full bg-white p-2 ">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <Link to="#">
+            <img
+              src="https://cdn-editing-temp.picsart.com/editing-temp-landings/c4e056b6-23b3-41d0-8200-93f445bac86c.png" alt="logo" className="w-24 sm:w-32" />
+          </Link>
+          <div>
+            <h1 className='font-bold text-xl text-gray-800'>Dashboard</h1>
+          </div>
+          <div className="bg-sky-100 p-2 rounded-full">
+            <img src="https://icon-library.com/images/icon-of-person/icon-of-person-8.jpg" className="w-8 h-8" />
+          </div>
+        </div>
+      </nav>
+      <section className=" flex justify-center p-1 min-h-screen">
+        <div className="bg-gray-100 flex w-full max-w-screen-xl">
+          <div className="w-56 bg-white shadow-md pt-4">
+            <nav className="flex flex-col justify-center gap-4 text-gray-700 font-medium">
 
-      {editMode ? (
-        <>
-          <input value={form.age} onChange={e => setForm({ ...form, age: e.target.value })} placeholder="Age" />
-          <input value={form.state} onChange={e => setForm({ ...form, state: e.target.value })} placeholder="State" />
-          <input value={form.qualification} onChange={e => setForm({ ...form, qualification: e.target.value })} placeholder="Qualification" />
-          <button onClick={handleUpdate}>Save</button>
-        </>
-      ) : (
-        <>
-          <p><b>Age:</b> {user.age || "Not set"}</p>
-          <p><b>State:</b> {user.state || "Not set"}</p>
-          <p><b>Qualification:</b> {user.qualification || "Not set"}</p>
-          <button onClick={() => setEditMode(true)}>Edit</button>
-        </>
-      )}
-    </div>
+              <div onClick={() => setActiveTab('addCourse')} className={`flex justify-center p-2 cursor-pointer ${activeTab === 'addCourse' ? 'bg-blue-100' : ''
+                }`}>
+                <button className="flex items-center gap-2" >
+                  <img
+                    src="https://cdn-icons-png.freepik.com/512/7854/7854804.png"
+                    alt="Add course Icon" className="w-5 h-5"
+                  />My Profile
+                </button>
+              </div>
+
+              <div onClick={() => setActiveTab('myCourses')} className={`flex justify-center p-2 cursor-pointer ${activeTab === 'myCourses' ? 'bg-blue-100' : ''
+                }`}>
+                <button className="flex items-center gap-2">
+                  <img
+                    src="https://icons.veryicon.com/png/o/miscellaneous/personal-center-1/real-name-authentication-22.png"
+                    className="w-5 h-6" /> My Courses
+                </button>
+              </div>
+            </nav>
+          </div>
+
+          {/* Main Content */}
+          <main className="flex-1 p-6 bg-gray-100">
+
+            {/* Add Course Form */}
+            {activeTab === 'addCourse' && (
+              <div className="bg-white p-6 rounded-lg shadow w-full max-w-md">
+                <h1 className="text-xl font-semibold mb-4 text-center">Profile</h1>
+                <form className="space-y-4" >
+
+                  <input name="name" type="text"
+                    placeholder="Name"
+                    className="w-full p-2 border rounded" required
+                  />
+                  <input type="text" name="email"
+                    placeholder="Email" className="w-full p-2 border rounded" required
+                  />
+                  <input type="text" name="phone"
+                    placeholder="Phone" className="w-full p-2 border rounded" required
+                  />
+                  <input type="number" name="age"
+                    placeholder="Age" className="w-full p-2 border rounded" required
+                  />
+                  <div className='flex space-x-4'>
+                    <input type="text" name="state"
+                      placeholder="State" className="w-full p-2 border rounded" required
+                    />
+                    <input type="text" name="city"
+                      placeholder="City" className="w-full p-2 border rounded" required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-black text-white py-2 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={loading}
+                  >
+                    {loading ? "Adding..." : "Add"}
+                  </button>
+
+                </form>
+              </div>
+            )}
+            {activeTab === 'myCourses' && (
+              <div className="bg-white p-6 rounded-lg shadow w-full max-w-3xl">
+                <h1 className="text-lg font-semibold mb-4">My Courses</h1>
+                <table className="min-w-full table-auto text-sm border border-gray-200 rounded overflow-hidden">
+                  <thead className="bg-gray-100 text-gray-700">
+                    <tr>
+                      <th className="text-left px-4 py-2">All Courses</th>
+                      <th className="text-center px-4 py-2">Earnings</th>
+                      <th className="text-center px-4 py-2">Students</th>
+                      <th className="text-center px-4 py-2">Published On</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t hover:bg-gray-50">
+                      <td className="flex items-center gap-2 px-4 py-3">
+                        <img
+                          src="https://img-c.udemycdn.com/course/240x135/614772_233b_9.jpg"
+                          alt="Course Thumbnail"
+                          className="w-10 h-10 rounded" />
+                        <span>Introduction to Cybersecurity</span>
+                      </td>
+                      <td className="px-4 py-3 text-center">₹ 450.0</td>
+                      <td className="px-4 py-3 text-center">2</td>
+                      <td className="px-4 py-3 text-center">20/06/2025</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </main>
+        </div>
+      </section>
+    </>
   );
 }
-
-export default Profile;

@@ -30,6 +30,17 @@ const userSchema = new mongoose.Schema({
     enum: ['USER', 'ADMIN'],
     default: 'USER',
   },
+  age: {
+    type: Number,
+  },
+  state: {
+    type: String,
+    default: '',
+  },
+  city: {
+    type: String,
+    default: '',
+  },
   resetOtp: {
     type: Number,
   },

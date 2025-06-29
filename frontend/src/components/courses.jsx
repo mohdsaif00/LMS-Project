@@ -14,12 +14,9 @@ export default function Courses() {
           credentials: "include",
         });
 
-        console.log("Response status:", res.status); // 🔍
-
         if (!res.ok) throw new Error("Unauthorized or failed to fetch courses");
 
         const data = await res.json();
-        console.log("Fetched data:", data); // 🔍
 
         setCourses(data.courses || []);
       } catch (err) {

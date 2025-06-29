@@ -70,7 +70,7 @@ export default function AdminDashboard() {
                 description: "",
                 category: "",
                 price: "",
-                createdBy: user._id, // keep it since it's needed
+                createdBy: user._id, 
             });
             setThumbnail(null);
             if (fileInputRef.current) {
