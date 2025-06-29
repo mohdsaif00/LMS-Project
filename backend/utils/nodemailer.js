@@ -11,3 +11,4 @@ export const mailer = nodemailer.createTransport({
     pass: process.env.SMTP_PASSWORD, // Use App Password if using Gmail
   },
 });
+

@@ -6,6 +6,7 @@ import userRouter from './routes/user.route.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import courseRouter from './routes/course.route.js';
+import contactRoute from './routes/contact.route.js'
 
 const app = express();
 app.use(express.json());
