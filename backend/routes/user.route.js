@@ -23,7 +23,7 @@ userRouter.post('/verify-otp', verifyOtp);
 userRouter.post('/reset-password', resetPassword);
 userRouter.post('/change-password', isAuthenticated, changePassword);
 userRouter.post('/create-order', createOrder);
-userRouter.get('/profile',isAuthenticated, getProfile);
+userRouter.get('/profile', isAuthenticated, getProfile);
 userRouter.put('/profile/update', isAuthenticated, updateProfile);
 
 export default userRouter;

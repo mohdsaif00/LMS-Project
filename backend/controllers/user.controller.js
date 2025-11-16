@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 import Razorpay from 'razorpay';
 
-
 const cookieOption = {
   httpOnly: true,
   secure: process.env.NODE_ENV === 'production',
@@ -358,38 +357,37 @@ export async function getProfile(req, res) {
   try {
     const user = await UserModel.findById(id).select('-password'); // exclude password
     if (!user) {
-      return res.status(404).json({ 
+      return res.status(404).json({
         message: 'User not found',
         success: false,
-        error: true 
+        error: true,
       });
     }
     res.json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ 
-      message: 'Server error', 
+    res.status(500).json({
+      message: 'Server error',
       success: false,
-      error: true
+      error: true,
     });
   }
-};
-
+}
 
 export const updateProfile = async (req, res) => {
   try {
-    const { id } = req.user; 
-    
+    const { id } = req.user;
+
     const { name, email, phone, age, state, city } = req.body;
 
     if (!name || !email || !phone || !age || !state || !city) {
-      return res.status(400).json({ message: "All fields are required" });
+      return res.status(400).json({ message: 'All fields are required' });
     }
 
     const user = await UserModel.findById(id);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: 'User not found' });
     }
 
     user.name = name;
@@ -402,12 +400,11 @@ export const updateProfile = async (req, res) => {
     await user.save();
 
     res.status(200).json({
-      message: "Profile updated successfully",
+      message: 'Profile updated successfully',
       profile: user,
     });
   } catch (err) {
-    console.error("Update Profile Error:", err);
-    res.status(500).json({ message: "Server Error" });
+    console.error('Update Profile Error:', err);
+    res.status(500).json({ message: 'Server Error' });
   }
 };
-
